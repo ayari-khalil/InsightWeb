@@ -1,0 +1,28 @@
+{% block body %}
+<div class="container">
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.nom) }}
+        {{ form_widget(form.nom) }}
+        {{ form_errors(form.nom) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.adresse) }}
+        {{ form_widget(form.adresse) }}
+        {{ form_errors(form.adresse) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.nb_professeur) }}
+        {{ form_widget(form.nb_professeur) }}
+        {{ form_errors(form.nb_professeur) }}
+    </div>
+
+    
+           
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}
