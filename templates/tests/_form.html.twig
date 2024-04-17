@@ -1,0 +1,74 @@
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_label(form.duree) }}
+                {{ form_widget(form.duree, {'attr': {'class': 'form-control form-control-sm'}}) }}
+                {{ form_errors(form.duree) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.note) }}
+                {{ form_widget(form.note, {'attr': {'class': 'form-control form-control-sm'}}) }}
+                {{ form_errors(form.note) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.matiere) }}
+                {{ form_widget(form.matiere, {'attr': {'class': 'form-control form-control-sm'}}) }}
+                {{ form_errors(form.matiere) }}
+            </div>
+
+            <div id="questions-container" data-prototype="{{ form_widget(form.questions.vars.prototype)|e('html_attr') }}">
+                
+                {% for questionForm in form.questions %}
+                    <div class="form-group question-group">
+                        {{ form_row(questionType) }}
+                        <button type="button" class="btn btn-danger delete-question-btn">Delete</button>
+                        {{ form_errors(questionType) }}
+                    </div>
+                {% endfor %}
+                <label class="required">Questions</label>
+                <button type="button" id="add-question-btn" class="btn btn-success">+</button>
+            </div>
+
+            
+            <button type="submit" class="btn btn-primary mt-3">Save</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const questionsContainer = document.getElementById('questions-container');
+    const addQuestionBtn = document.getElementById('add-question-btn');
+
+    if (questionsContainer && addQuestionBtn) { 
+        addQuestionBtn.addEventListener('click', function() {
+           
+            const index = questionsContainer.querySelectorAll('.question-group').length;
+            const prototype = questionsContainer.getAttribute('data-prototype').replace(/__name__/g, index);
+            const div = document.createElement('div');
+            div.className = 'form-group question-group';
+            div.innerHTML = prototype;
+            div.insertAdjacentHTML('beforeend', '<button type="button" class="btn btn-danger delete-question-btn">Delete</button>');
+            questionsContainer.appendChild(div);
+        });
+
+        
+        questionsContainer.addEventListener('click', function(event) {
+            if (event.target.classList.contains('delete-question-btn')) {
+                const questionGroup = event.target.closest('.question-group');
+                if (questionGroup) {
+                    questionGroup.remove();
+                }
+            }
+        });
+    } else {
+        console.error('questionsContainer or addQuestionBtn not found.');
+    }
+});
+</script>
+{% endblock %}

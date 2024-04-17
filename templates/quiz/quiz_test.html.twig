@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            padding: 20px;
+        }
+
+        .quiz-question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .radio-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-input {
+            display: none;
+        }
+
+        .custom-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #007bff;
+            border-radius: 50%;
+            margin-right: 10px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .custom-radio::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background-color: #007bff;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.2s ease;
+        }
+
+        .radio-input:checked + .custom-radio::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .radio-label {
+            cursor: pointer;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quiz Test</h1>
+
+        <form id="quizForm" action="{{ path('submit_quiz_answers') }}" method="POST">
+            {% for quiz in quizzes %}
+                <div class="quiz-question">
+                    <h2>{{ quiz.question }}</h2>
+                    <div class="radio-wrapper">
+                        <input type="radio" id="quiz_{{ quiz.qid }}_opt1" class="radio-input" name="quiz_{{ quiz.qid }}" value="1" data-correct="{{ quiz.correctOption }}">
+                        <label for="quiz_{{ quiz.qid }}_opt1" class="custom-radio"></label>
+                        <span class="radio-label">{{ quiz.opt1 }}</span>
+                    </div>
+                    <div class="radio-wrapper">
+                        <input type="radio" id="quiz_{{ quiz.qid }}_opt2" class="radio-input" name="quiz_{{ quiz.qid }}" value="2" data-correct="{{ quiz.correctOption }}">
+                        <label for="quiz_{{ quiz.qid }}_opt2" class="custom-radio"></label>
+                        <span class="radio-label">{{ quiz.opt2 }}</span>
+                    </div>
+                    <div class="radio-wrapper">
+                        <input type="radio" id="quiz_{{ quiz.qid }}_opt3" class="radio-input" name="quiz_{{ quiz.qid }}" value="3" data-correct="{{ quiz.correctOption }}">
+                        <label for="quiz_{{ quiz.qid }}_opt3" class="custom-radio"></label>
+                        <span class="radio-label">{{ quiz.opt3 }}</span>
+                    </div>
+                    <div class="radio-wrapper">
+                        <input type="radio" id="quiz_{{ quiz.qid }}_opt4" class="radio-input" name="quiz_{{ quiz.qid }}" value="4" data-correct="{{ quiz.correctOption }}">
+                        <label for="quiz_{{ quiz.qid }}_opt4" class="custom-radio"></label>
+                        <span class="radio-label">{{ quiz.opt4 }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+
+</body>
+</html>

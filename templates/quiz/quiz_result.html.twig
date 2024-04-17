@@ -1,0 +1,87 @@
+{% extends 'default.html.twig' %}
+
+{% block title %}Quiz Result{% endblock %}
+
+{% block styles %}
+    <style>
+        .message {
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .medium {
+            color: orange;
+        }
+
+        .failed {
+            color: red;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .retry-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .retry-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Quiz Result</h1>
+
+        <p>Your score: <span class="score">{{ scorePercentage }}%</span></p>
+
+        {% set messageClass = '' %}
+
+        {% if scorePercentage >= 80 %}
+            {% set messageClass = 'success' %}
+        {% elseif scorePercentage >= 60 %}
+            {% set messageClass = 'medium' %}
+        {% else %}
+            {% set messageClass = 'failed' %}
+        {% endif %}
+
+        <p class="message {{ messageClass }}">
+            {% if scorePercentage >= 80 %}
+                Félicitations ! Vous avez réussi le quiz avec succès !
+            {% elseif scorePercentage >= 60 %}
+                Vous avez réussi le quiz. Bon travail !
+            {% else %}
+                Malheureusement, vous n'avez pas réussi le quiz cette fois-ci. Bonne chance la prochaine fois !
+            {% endif %}
+        </p>
+
+        {# You can also provide an option to retry the quiz #}
+        <a href="{{ path('quiz_test') }}" class="retry-link">Retry Quiz</a>
+    </div>
+{% endblock %}

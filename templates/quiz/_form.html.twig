@@ -1,0 +1,44 @@
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_label(form.question) }}
+                {{ form_widget(form.question, {'attr': {'class': 'form-control form-control-sm'}}) }}
+                {{ form_errors(form.question) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.opt1) }}
+                {{ form_widget(form.opt1, {'attr': {'class': 'form-control form-control-sm'}}) }}
+                {{ form_errors(form.opt1) }}
+            </div>
+
+          <div class="form-group">
+                {{ form_label(form.opt2) }}
+                {{ form_widget(form.opt2, {'attr': {'class': 'form-control form-control-sm'}}) }}
+                {{ form_errors(form.opt2) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.opt3) }}
+                {{ form_widget(form.opt3, {'attr': {'class': 'form-control form-control-sm'}}) }}
+                {{ form_errors(form.opt3) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.opt4) }}
+                {{ form_widget(form.opt4, {'attr': {'class': 'form-control form-control-sm'}}) }}
+                {{ form_errors(form.opt4) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.correct_option) }}
+                {{ form_widget(form.correct_option, {'attr': {'class': 'form-control form-control-sm'}}) }}
+                {{ form_errors(form.correct_option) }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

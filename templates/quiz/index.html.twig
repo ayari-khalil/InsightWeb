@@ -1,0 +1,47 @@
+{% extends 'default.html.twig' %}
+
+{% block title %}Quiz index{% endblock %}
+
+{% block body %}
+    <h1>Quiz index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                
+                <th>Qid</th>
+                <th>Question</th>
+                <th>Opt1</th>
+                <th>Opt2</th>
+                <th>Opt3</th>
+                <th>Opt4</th>
+                <th>Correct_option</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for quiz in quizzes %}
+            <tr>
+             
+                <td>{{ quiz.qid }}</td>
+                <td>{{ quiz.question }}</td>
+                <td>{{ quiz.opt1 }}</td>
+                <td>{{ quiz.opt2 }}</td>
+                <td>{{ quiz.opt3 }}</td>
+                <td>{{ quiz.opt4 }}</td>
+                <td>{{ quiz.correctOption }}</td>
+                <td>
+                    <a href="{{ path('app_quiz_show', {'qid': quiz.qid}) }}" class="btn btn-primary">Show</a>
+                    <a href="{{ path('app_quiz_edit', {'qid': quiz.qid}) }}" class="btn btn-secondary">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_quiz_new') }}" class="btn btn-primary">Create new</a>
+{% endblock %}

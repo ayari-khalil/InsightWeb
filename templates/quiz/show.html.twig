@@ -1,0 +1,54 @@
+{% extends 'default.html.twig' %}
+
+{% block title %}Quiz{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="text-center">Quiz</h1>
+
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Qid</th>
+                        <td>{{ quiz.qid }}</td>
+                    </tr>
+                    <tr>
+                        <th>Question</th>
+                        <td>{{ quiz.question }}</td>
+                    </tr>
+                    <tr>
+                        <th>Opt1</th>
+                        <td>{{ quiz.opt1 }}</td>
+                    </tr>
+                    <tr>
+                        <th>Opt2</th>
+                        <td>{{ quiz.opt2 }}</td>
+                    </tr>
+                    <tr>
+                        <th>Opt3</th>
+                        <td>{{ quiz.opt3 }}</td>
+                    </tr>
+                    <tr>
+                        <th>Opt4</th>
+                        <td>{{ quiz.opt4 }}</td>
+                    </tr>
+                    <tr>
+                        <th>Correct Option</th>
+                        <td>{{ quiz.correctOption }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row justify-content-center">
+            <div class="col-md-5">
+            <a href="{{ path('app_quiz_index') }}" class="btn btn-success btn-block mt-3">Back to List</a>
+            <a href="{{ path('app_quiz_edit', {'qid': quiz.qid}) }} " class="btn btn-primary btn-block mt-3">edit</a>
+            </div>
+            </div>
+
+            {{ include('quiz/_delete_form.html.twig') }}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -3,3 +3,63 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+app_quiz_index:
+    path: /quiz
+    controller: 'App\Controller\QuizController::index'
+    methods: ['GET']
+
+app_quiz_new:
+    path: /quiz/new
+    controller: 'App\Controller\QuizController::new'
+    methods: ['GET', 'POST']
+
+app_quiz_show:
+    path: /quiz/{qid}
+    controller: 'App\Controller\QuizController::show'
+    methods: ['GET']
+   
+
+app_quiz_edit:
+    path: /quiz/{qid}/edit
+    controller: 'App\Controller\QuizController::edit'
+    methods: ['GET', 'POST']
+  
+
+app_quiz_delete:
+    path: /quiz/{qid}
+    controller: 'App\Controller\QuizController::delete'
+    methods: ['POST']
+    
+app_tests_index:
+    path: /tests
+    controller: 'App\Controller\TestsController::index'
+    methods: ['GET']
+
+app_tests_new:
+    path: /tests/new
+    controller: 'App\Controller\TestsController::new'
+    methods: ['GET', 'POST']
+
+app_tests_show:
+    path: /tests/{test_id}
+    controller: 'App\Controller\TestsController::show'
+    methods: ['GET']
+    requirements:
+        test_id: '\d+'
+
+app_tests_edit:
+    path: /tests/{test_id}/edit
+    controller: 'App\Controller\TestsController::edit'
+    methods: ['GET', 'POST']
+   
+quiz_test:
+    path: /passerQuiz
+    controller: 'App\Controller\QuizController::showQuizTest'
+    methods: ['GET']
+
+app_tests_delete:
+    path: /tests/{test_id}
+    controller: 'App\Controller\TestsController::delete'
+    methods: ['POST']
+    
