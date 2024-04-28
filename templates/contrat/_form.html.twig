@@ -1,0 +1,21 @@
+{% block body %}
+<div class="container">
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.date_contrat) }}
+        {{ form_widget(form.date_contrat) }}
+        {{ form_errors(form.date_contrat) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.nb_days) }}
+        {{ form_widget(form.nb_days) }}
+        {{ form_errors(form.nb_days) }}
+    </div>
+
+       
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

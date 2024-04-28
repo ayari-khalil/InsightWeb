@@ -1,0 +1,115 @@
+app_contrat_index:
+    path: /contrat
+    controller: App\Controller\ContratController::index
+    methods: ['GET']
+
+app_contrat_new:
+    path: /contrat/new
+    controller: App\Controller\ContratController::new
+    methods: ['GET', 'POST']
+
+app_contrat_show:
+    path: /contrat/{id}
+    controller: App\Controller\ContratController::show
+    methods: ['GET']
+    
+
+app_contrat_edit:
+    path: /contrat/{id}/edit
+    controller: App\Controller\ContratController::edit
+    methods: ['GET', 'POST']
+
+app_contrat_delete:
+    path: /contrat/{id}
+    controller: App\Controller\ContratController::delete
+    methods: ['POST']
+    
+app_contrat_list:
+    path: '/listContrat'
+    controller: 'App\Controller\ContratController::showContratList'
+    methods: ['GET']
+
+
+app_ecole_index:
+    path: /ecoles
+    controller: App\Controller\EcoleController::index
+    methods: ['GET']
+
+app_ecole_new:
+    path: /ecole/new
+    controller: App\Controller\EcoleController::new
+    methods: ['GET', 'POST']
+
+app_ecole_show:
+    path: /ecole/{id}
+    controller: App\Controller\EcoleController::show
+    methods: ['GET']
+
+app_ecole_edit:
+    path: /ecole/{id}/edit
+    controller: App\Controller\EcoleController::edit
+    methods: ['GET', 'POST']
+
+app_ecole_delete:
+    path: /ecole/{id}
+    controller: App\Controller\EcoleController::delete
+    methods: ['POST']
+
+app_professeur_index:
+    path: /professeurs
+    controller: App\Controller\ProfesseurController::index
+    methods: ['GET']
+
+app_professeur_new:
+    path: /professeur/new
+    controller: App\Controller\ProfesseurController::new
+    methods: ['GET', 'POST']
+
+app_professeur_show:
+    path: /professeur/{id}
+    controller: App\Controller\ProfesseurController::show
+    methods: ['GET']
+
+app_professeur_edit:
+    path: /professeur/{id}/edit
+    controller: App\Controller\ProfesseurController::edit
+    methods: ['GET', 'POST']
+
+app_professeur_delete:
+    path: /professeur/{id}
+    controller: App\Controller\ProfesseurController::delete
+    methods: ['POST']
+
+
+
+
+
+app_entrprise_index:
+    path: /entrprises
+    controller: App\Controller\EntrpriseController::index
+    methods: GET
+
+app_entrprise_new:
+    path: /entrprise/new
+    controller: App\Controller\EntrpriseController::new
+    methods: ['GET', 'POST']
+
+app_entrprise_show:
+    path: /entrprise/{id}
+    controller: App\Controller\EntrpriseController::show
+    methods: GET
+
+app_entrprise_edit:
+    path: /entrprise/{id}/edit
+    controller: App\Controller\EntrpriseController::edit
+    methods: ['GET', 'POST']
+
+app_entrprise_delete:
+    path: /entrprise/{id}
+    controller: App\Controller\EntrpriseController::delete
+    methods: POST
+
+
+
+
+
