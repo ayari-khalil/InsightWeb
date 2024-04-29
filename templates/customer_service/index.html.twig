@@ -1,0 +1,159 @@
+{# index.html.twig #}
+
+{% extends 'template.html.twig' %}
+  
+{% block body %}
+    <!-- Sidebar Start -->
+    <div class="sidebar pe-4 pb-3">
+        <nav class="navbar bg-light navbar-light">
+            <a href="index.html" class="navbar-brand mx-4 mb-3">
+                <h3 class="text-primary">
+                    <i class="fa fa-hashtag me-2"></i>DASHMIN
+                </h3>
+            </a>
+            <div class="d-flex align-items-center ms-4 mb-4">
+                <div class="position-relative">
+                 <img class="rounded-circle me-lg-2" src="{{ asset('img/user.jpg') }}" alt="" style="width: 40px; height: 40px;">
+                    <div
+                        class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"
+                    ></div>
+                </div>
+                <div class="ms-3">
+                    <h6 class="mb-0">Nadine Ben Abdallah</h6>
+                    <span>Admin</span>
+                </div>
+            </div>
+            <div class="navbar-nav w-100">
+                <a href="index.html" class="nav-item nav-link"
+                   ><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a
+                >
+
+                <a href="{{ path('app_responses_index') }}" class="nav-item nav-link"
+                   ><i class="fa fa-keyboard me-2"></i>Responses</a
+                >
+                <a href="{{ path('app_responses_index') }}" class="nav-item nav-link active"
+                   ><i class="fa fa-keyboard me-2"></i>Opened Tickets</a
+                >
+            </div>
+        </nav>
+    </div>
+{% endblock %}
+
+{% block title %}Opened Tickets{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid pt-4 px-4">
+<div class="progress-container">
+    <h4>UNTREATED</h4>
+    <div class="progress">
+        <div id="untreatedProgress" class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+    </div>
+</div>
+<div class="progress-container">
+    <h4>IN PROGRESS</h4>
+    <div class="progress">
+        <div id="inProgressProgress" class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+    </div>
+</div>
+<div class="progress-container">
+    <h4>TREATED</h4>
+    <div class="progress">
+        <div id="treatedProgress" class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+    </div>
+</div>
+<div class="container-fluid pt-4 px-4">
+
+    <div class="row g-4">
+        <div class="col-12">
+        
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Opened Tickets</h6>
+<form method="get">
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="sortSelect">Sort By</label>
+        <select class="form-select" id="sortSelect" name="criteria" onchange="this.form.submit()">
+            <option value="fullname">Full Name</option>
+            <option value="issue">Issue</option>
+            <option value="stater">Status</option>
+        </select>
+                <button type="button" class="btn btn-primary" onclick="sortTable()">Sort</button>
+
+    </div>
+</form>
+
+                                            <input id="searchInput" type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
+
+                </form>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone Number</th>
+                                <th scope="col">Issue</th>
+                                <th scope="col">Subject</th>
+                                <th scope="col">Message</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="searchTableBody">
+                            {% for customer_service in customer_services %}
+                                <tr>
+                                    <td>{{ customer_service.idsup }}</td>
+                                    <td>{{ customer_service.fullname }}</td>
+                                    <td>{{ customer_service.emailsup }}</td>
+                                    <td>{{ customer_service.pnsup }}</td>
+                                    <td>{{ customer_service.issue }}</td>
+                                    <td>{{ customer_service.subject }}</td>
+                                    <td>{{ customer_service.message }}</td>
+                                    <td>
+                                        {% if customer_service.stater == 0 %}
+                                            UNTREATED
+                                        {% elseif customer_service.stater == 1 %}
+                                            IN PROGRESS
+                                        {% else %}
+                                            TREATED
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <form method="post" action="{{ path('app_customer_service_delete', {'idsup': customer_service.idsup}) }}" class="delete-form">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ customer_service.idsup) }}">
+                                                <button type="submit" class="btn btn-sm btn-danger me-2" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+                                            </form>
+                                            <form method="post" action="{{ path('app_customer_service_edit', {'idsup': customer_service.idsup}) }}" class="me-2">
+                                                <input type="hidden" name="_method" value="POST">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('edit' ~ customer_service.idsup) }}">
+                                                <button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Are you sure you want to edit this item?')">Edit</button>
+                                            </form>
+                                            <form method="post" action="{{ path('app_responses_new', {'idsup': customer_service.idsup}) }}">
+                                                <input type="hidden" name="_method" value="POST">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('new' ~ customer_service.idsup) }}">
+                                                <input type="hidden" name="idsup" value="{{ customer_service.idsup }}">
+                                                <input type="hidden" name="emailsup" value="{{ customer_service.emailsup }}">
+                                                <button type="submit" class="btn btn-sm btn-success">Respond</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="9">No records found</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                 <!-- Pagination controls -->
+                <div class="pagination mt-4">
+                    {{ knp_pagination_render(customer_services) }}
+                </div>
+            </div>
+        </div>
+    </div> </div>
+
+{% endblock %}

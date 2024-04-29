@@ -1,0 +1,104 @@
+{# index.html.twig #}
+
+{% extends 'template.html.twig' %}
+
+{% block title %}Responses{% endblock %}
+
+{% block content %}
+       <!-- Sidebar Start -->
+      <div class="sidebar pe-4 pb-3">
+        <nav class="navbar bg-light navbar-light">
+          <a href="index.html" class="navbar-brand mx-4 mb-3">
+            <h3 class="text-primary">
+              <i class="fa fa-hashtag me-2"></i>DASHMIN
+            </h3>
+          </a>
+          <div class="d-flex align-items-center ms-4 mb-4">
+            <div class="position-relative">
+              <img class="rounded-circle me-lg-2" src="{{ asset('img/user.jpg') }}" alt="" style="width: 40px; height: 40px;">
+
+              <div
+                class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"
+              ></div>
+            </div>
+            <div class="ms-3">
+              <h6 class="mb-0">Nadine Ben Abdallah</h6>
+              <span>Admin</span>
+            </div>
+          </div>
+          <div class="navbar-nav w-100">
+            <a href="index.html" class="nav-item nav-link"
+              ><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a
+            >
+
+            <a href="form.html" class="nav-item nav-link active"
+              ><i class="fa fa-keyboard me-2"></i>Responses</a
+            >
+           <a href="{{ path('app_customer_service_index') }}" class="nav-item nav-link"
+  ><i class="fa fa-keyboard me-2"></i>Opened Tickets</a
+>
+
+          </div>
+        </nav>
+      </div>
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="bg-light rounded h-100 p-4">
+                    <h6 class="mb-4">Responses</h6>
+         <input id="searchInput" type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Response ID</th>
+                                <th scope="col">Ticket ID</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Response</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="searchTableBody">
+                            {% for response in responses %}
+                                <tr>
+                                    <td>{{ response.idres }}</td>
+                                    <td>{{ response.idsup }}</td>
+                                    <td>{{ response.emailsup }}</td>
+                                    <td>{{ response.reponse }}</td>
+                                    <td>{{ response.dater ? response.dater|date('Y-m-d') : '' }}</td>
+                                    <td>
+                                        <div class="d-flex">
+                                            <form method="post" action="{{ path('app_responses_delete', {'idres': response.idres}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ response.idres) }}">
+                                                <button type="submit" class="btn btn-danger me-2">Delete</button>
+                                            </form>
+                                            <a href="{{ path('app_responses_edit', {'idres': response.idres}) }}" class="btn btn-primary">Edit</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6">No records found</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+                                <div class="pagination mt-4">
+                    {{ knp_pagination_render(responses) }}
+                </div>
+        </div>
+    </div>
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="bg-light rounded h-100 p-4">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

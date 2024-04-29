@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Responses{% endblock %}
+
+{% block body %}
+    {{ include('responses/_form.html.twig') }}
+
+    <a href="{{ path('app_responses_index') }}">back to list</a>
+{% endblock %}

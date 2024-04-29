@@ -1,0 +1,73 @@
+{% extends 'front.html.twig' %}
+
+{% block content %}
+    {# Display flash messages at the top #}
+    <div class="container mt-4">
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <a href="{{ path('app_customer_service_new') }}" class="d-inline-block position-relative text-secondary text-uppercase pb-2">go back?</a>
+    <h2 class="display-4">Your Submitted Ticket</h2>
+    <div class="container mt-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li style="text-align: left;">
+                        <div class="alert alert-secondary" role="alert" style="opacity: 0.8; background-color: #E6E6FA;">
+                            <strong style="color: black;">Fullname:</strong> <span style="color: black;">{{ customer_service.fullname }}</span><br>
+                        </div>
+                        <div class="alert alert-secondary" role="alert" style="opacity: 0.8; background-color: #E6E6FA;">
+                            <strong style="color: black;">Email:</strong> <span style="color: black;">{{ customer_service.emailsup }}</span><br>
+                        </div>
+                        <div class="alert alert-secondary" role="alert" style="opacity: 0.8; background-color: #E6E6FA;">
+                            <strong style="color: black;">Phone Number:</strong> <span style="color: black;">{{ customer_service.pnsup }}</span><br>
+                        </div>
+                        <div class="alert alert-secondary" role="alert" style="opacity: 0.8; background-color: #E6E6FA;">
+                            <strong style="color: black;">Issue:</strong> <span style="color: black;">{{ customer_service.issue }}</span><br>
+                        </div>
+                        <div class="alert alert-secondary" role="alert" style="opacity: 0.8; background-color: #E6E6FA;">
+                            <strong style="color: black;">Subject:</strong> <span style="color: black;">{{ customer_service.subject }}</span><br>
+                        </div>
+                        <div class="alert alert-secondary" role="alert" style="opacity: 0.8; background-color: #E6E6FA;">
+                            <strong style="color: black;">Message:</strong> <span style="color: black;">{{ customer_service.message }}</span><br>
+                        </div>
+                        <!-- Add other relevant fields here -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .card-title {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .list-unstyled li {
+            margin-bottom: 10px;
+        }
+        .list-unstyled strong {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .alert-secondary {
+            border-color: #4169E1;
+        }
+    </style>
+{% endblock %}

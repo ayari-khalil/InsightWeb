@@ -1,0 +1,4 @@
+# messages.en.yaml
+This value is not valid.: "Invalid Data"
+This value should have exactly {{ limit }} characters.: "This Field must be 8 digits long"
+Email must be a valid email address.: "Custom error message for invalid email address."

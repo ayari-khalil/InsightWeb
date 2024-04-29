@@ -1,0 +1,41 @@
+{% extends 'front.html.twig' %}
+
+{% block content %}
+<h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">Need Help?</h6>
+<h2 class="display-4">Send Us A Message</h2>
+<form method="post" action="{{ path('app_customer_service_new') }}" novalidate>
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            {{ form_row(form.fullname, {'attr': {'class': 'form-control border-top-0 border-right-0 border-left-0 p-0', 'placeholder': 'Your Name'}, 'label': false}) }}
+        </div>
+        <div class="col-lg-6 mb-4">
+            {{ form_row(form.emailsup, {'attr': {'class': 'form-control border-top-0 border-right-0 border-left-0 p-0', 'placeholder': 'Your Email'}, 'label': false}) }}
+            <small class="form-text text-muted">Please enter a valid email address.</small>
+            {% if form_errors(form.emailsup) %}
+                <div class="error-message">{{ form_errors(form.emailsup) }}</div>
+            {% endif %}
+        </div>
+        <div class="col-lg-6 mb-4">
+            {{ form_row(form.pnsup, {'attr': {'class': 'form-control border-top-0 border-right-0 border-left-0 p-0', 'placeholder': 'Phone Number'}, 'label': false}) }}
+            <small class="form-text text-muted">Please enter a valid phone number (8 digits).</small>
+            {% if form_errors(form.pnsup) %}
+                <div class="error-message">{{ form_errors(form.pnsup) }}</div>
+            {% endif %}
+        </div>
+        <div class="col-lg-6 mb-4">
+            {{ form_row(form.subject, {'attr': {'class': 'form-control border-top-0 border-right-0 border-left-0 p-0', 'placeholder': 'Subject'}, 'label': false}) }}
+        </div>
+        <div class="col-12 mb-4">
+            {{ form_row(form.issue, {'attr': {'class': 'form-control'}, 'label': 'Choose an issue'}) }}
+        </div>
+        <div class="col-12 mb-4">
+            {{ form_row(form.message, {'attr': {'class': 'form-control border-top-0 border-right-0 border-left-0 p-0', 'rows': '6', 'placeholder': 'Message'}, 'label': false}) }}
+        </div>
+        <div class="col-12 text-center">
+            <button class="btn btn-primary py-3 px-5" type="submit">{{ button_label|default('Send Message') }}</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+</form>
+{% endblock %}
