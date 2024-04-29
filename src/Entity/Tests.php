@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\TestsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TestsRepository::class)]
@@ -23,17 +22,18 @@ class Tests
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $matiere;
+/**
+ * @ORM\OneToMany(targetEntity=Questions::class, mappedBy="test", cascade={"persist", "remove"}, fetch="EAGER")
+ */
+private Collection $questions;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Questions::class, mappedBy="test", cascade={"persist", "remove"})
-     */
-    private Collection $questions;
 
     public function __construct()
     {
-        $this->test_id = null;  
-        $this->questions = new ArrayCollection();
+        $this->test_id = null;
+        $this->questions = new ArrayCollection(); 
     }
+
 
     public function getTest_id(): ?int
 {
@@ -76,7 +76,6 @@ class Tests
 
         return $this;
     }
-
     /**
      * @return Collection|Questions[]
      */
@@ -91,20 +90,17 @@ class Tests
             $this->questions[] = $question;
             $question->setTest($this);
         }
-
         return $this;
     }
 
     public function removeQuestion(Questions $question): self
     {
         if ($this->questions->removeElement($question)) {
-            // set the owning side to null (unless already changed)
+           
             if ($question->getTest() === $this) {
                 $question->setTest(null);
             }
         }
-
         return $this;
     }
-    
 }

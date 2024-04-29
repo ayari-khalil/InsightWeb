@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Form;
 
 use App\Entity\Tests;
@@ -7,10 +6,13 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Regex;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
 
 class TestsType extends AbstractType
 {
@@ -19,43 +21,56 @@ class TestsType extends AbstractType
         $builder
             ->add('duree', IntegerType::class, [
                 'constraints' => [
-                    new NotBlank(),
+                    new NotBlank(['message' => 'Entrez la duration de test']),
                     new Type([
                         'type' => 'integer',
-                        'message' => 'The value {{ value }} is not a valid {{ type }}.',
+                        'message' => 'le valeur {{ value }} nest pas valide {{ type }} pour durée.',
                     ]),
                 ],
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'Entrez durée en minutes',
                 ],
+                'label' => 'Duration (minutes)',
             ])
             ->add('note', IntegerType::class, [
                 'constraints' => [
                     new Type([
                         'type' => 'integer',
-                        'message' => 'The value {{ value }} is not a valid {{ type }}.',
+                        'message' => 'le valeur {{ value }} nest pas valide {{ type }} pour note.',
                     ]),
                 ],
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'Entrez la note',
                 ],
-            ]) 
+                'label' => 'Note',
+            ])
             ->add('matiere', null, [
                 'constraints' => [
-                    new NotBlank(),
+                    new NotBlank(['message' => 'Please enter the subject']),
+                    new Length([
+                        'min' => 1,
+                        'max' => 255,
+                        'minMessage' => 'The subject must be at least {{ limit }} characters long',
+                        'maxMessage' => 'The subject cannot be longer than {{ limit }} characters',
+                    ]),
+                    new Regex([
+                        'pattern' => '/^[a-zA-Z0-9\s]+$/',
+                        'message' => 'The subject can only contain letters, numbers, and spaces.',
+                    ]),
                 ],
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'Enter the subject',
                 ],
+                'label' => 'Subject',
             ])
-            ->add('questions', CollectionType::class, [
-                'entry_type' => QuestionType::class, // Replace 'QuestionType' with your form type for questions
-                'entry_options' => [
-                    'label' => false,
-                ],
-                'allow_add' => true, 
-                'allow_delete' => true, 
-                'by_reference' => false,
+           
+            ->add('captcha', Recaptcha3Type::class, [
+                'constraints' => new Recaptcha3(),
+                'action_name' => 'tets',
+            
             ]);
     }
 

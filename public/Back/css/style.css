@@ -13,7 +13,9 @@
     z-index: 99;
 }
 
-
+.bg-custom {
+    background-color: #120f2d;
+}
 /*** Spinner ***/
 #spinner {
     opacity: 0;

@@ -1,0 +1,31 @@
+{% extends 'default.html.twig' %}
+
+
+{% block title %}Take Exam{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center mb-5">Take Exam</h1>
+
+        {% for test in tests %}
+            <div class="card mb-4">
+                <div class="card-header bg-custom text-white"> {# Add custom class here #}
+                    <h2 class="mb-0">{{ test.getMatiere() }}</h2>
+                </div>
+                <div class="card-body">
+                    <form action="{{ path('test_pass', {'id': test.getTest_Id()}) }}" method="POST" enctype="multipart/form-data">
+                        {% for question in questionsByTest[test.getTest_id()] %}
+                            <div class="form-group">
+                                <label for="question{{ question.getQuestionId() }}" class="font-weight-bold">{{ question.getQuestionText() }}</label>
+                                <input type="text" id="question{{ question.getQuestionId() }}" name="answers[{{ question.getQuestionId() }}]" class="form-control" required>
+                                <!-- Add file input field for uploading files -->
+                                <input type="file" name="files[{{ question.getQuestionId() }}]" class="form-control-file mt-2" required>
+                            </div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary">Submit Answers</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

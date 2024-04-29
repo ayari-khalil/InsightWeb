@@ -1,31 +1,9 @@
-{% extends 'default.html.twig' %}
-{% block styles %}
-    <style>
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #007bff;
-            border: 2px solid #007bff;
-            border-radius: 6px;
-            color: white;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-        }
+{% extends 'back.html.twig' %}
 
-        button:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-        
-        button:active {
-            background-color: #004080;
-            border-color: #004080;
-        }
-    </style>
-{% endblock %}
 {% block title %}Tests index{% endblock %}
 
 {% block body %}
+    {{ parent() }} 
     <h1>Tests index</h1>
 
     <table class="table">
@@ -46,10 +24,8 @@
                 <td>{{ test.note }}</td>
                 <td>{{ test.matiere }}</td>
                 <td>
-                  <a href="{{ path('app_tests_show', {'test_id': test.test_id}) }}" class="btn btn-primary">Show</a>
+                    <a href="{{ path('app_tests_show', {'test_id': test.test_id}) }}" class="btn btn-primary">Show</a>
                     <a href="{{ path('app_tests_edit', {'test_id': test.test_id}) }}" class="btn btn-secondary">Edit</a>
-
-
                 </td>
             </tr>
         {% else %}
@@ -60,6 +36,5 @@
         </tbody>
     </table>
 
-  <a href="{{ path('app_tests_new') }}" class="btn btn-primary">Create new</a>
-
+    <a href="{{ path('app_tests_new') }}" class="btn btn-primary">Create new</a>
 {% endblock %}
