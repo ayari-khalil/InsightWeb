@@ -20,21 +20,6 @@
                 {{ form_widget(form.matiere, {'attr': {'class': 'form-control form-control-sm'}}) }}
                 {{ form_errors(form.matiere) }}
             </div>
-
-            <div id="questions-container" data-prototype="{{ form_widget(form.questions.vars.prototype)|e('html_attr') }}">
-                
-                {% for questionForm in form.questions %}
-                    <div class="form-group question-group">
-                        {{ form_row(questionType) }}
-                        <button type="button" class="btn btn-danger delete-question-btn">Delete</button>
-                        {{ form_errors(questionType) }}
-                    </div>
-                {% endfor %}
-                <label class="required">Questions</label>
-                <button type="button" id="add-question-btn" class="btn btn-success">+</button>
-            </div>
-
-            
             <button type="submit" class="btn btn-primary mt-3">Save</button>
             {{ form_end(form) }}
         </div>

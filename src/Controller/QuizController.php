@@ -14,11 +14,15 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/quiz')]
 class QuizController extends AbstractController
 {
-    #[Route('/', name: 'app_quiz_index', methods: ['GET'])]
-    public function index(QuizRepository $quizRepository): Response
+ #[Route('/', name: 'app_quiz_index', methods: ['GET'])]
+    public function index(Request $request, QuizRepository $quizRepository): Response
     {
+        $sortBy = $request->query->get('sortBy', 'qid'); // Default sorting by qid
+
+        $quizzes = $quizRepository->findAllSortedBy($sortBy);
+
         return $this->render('quiz/index.html.twig', [
-            'quizzes' => $quizRepository->findAll(),
+            'quizzes' => $quizzes,
         ]);
     }
 

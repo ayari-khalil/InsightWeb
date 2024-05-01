@@ -15,10 +15,14 @@ use Symfony\Component\Routing\Attribute\Route;
 class TestsController extends AbstractController
 {
     #[Route('/', name: 'app_tests_index', methods: ['GET'])]
-    public function index(TestsRepository $testsRepository): Response
+    public function index(Request $request, TestsRepository $testsRepository): Response
     {
+        $sortBy = $request->query->get('sortBy', 'duree'); // Default sorting by name
+
+        $tests = $testsRepository->findAllSortedBy($sortBy);
+
         return $this->render('tests/index.html.twig', [
-            'tests' => $testsRepository->findAll(),
+            'tests' => $tests,
         ]);
     }
 

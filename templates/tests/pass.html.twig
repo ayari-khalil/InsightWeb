@@ -1,7 +1,35 @@
 {% extends 'default.html.twig' %}
 
-
 {% block title %}Take Exam{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 100px;
+            background-color: #f0f0f0;
+            border-radius: 50%;
+            border: 3px solid #ccc;
+            font-weight: bold;
+        }
+
+        .countdown-timer span {
+            font-size: 36px;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -9,23 +37,58 @@
 
         {% for test in tests %}
             <div class="card mb-4">
-                <div class="card-header bg-custom text-white"> {# Add custom class here #}
+                <div class="card-header bg-custom text-white">
                     <h2 class="mb-0">{{ test.getMatiere() }}</h2>
                 </div>
                 <div class="card-body">
-                    <form action="{{ path('test_pass', {'id': test.getTest_Id()}) }}" method="POST" enctype="multipart/form-data">
+                    <form id="testForm{{ test.getTest_id() }}" action="{{ path('test_pass', {'id': test.getTest_Id()}) }}" method="POST" enctype="multipart/form-data">
                         {% for question in questionsByTest[test.getTest_id()] %}
                             <div class="form-group">
                                 <label for="question{{ question.getQuestionId() }}" class="font-weight-bold">{{ question.getQuestionText() }}</label>
                                 <input type="text" id="question{{ question.getQuestionId() }}" name="answers[{{ question.getQuestionId() }}]" class="form-control" required>
-                                <!-- Add file input field for uploading files -->
                                 <input type="file" name="files[{{ question.getQuestionId() }}]" class="form-control-file mt-2" required>
                             </div>
                         {% endfor %}
                         <button type="submit" class="btn btn-primary">Submit Answers</button>
                     </form>
+                    <div class="countdown-container" id="countdown{{ test.getTest_id() }}">
+                        <div class="countdown-timer">
+                            <span id="minutes{{ test.getTest_id() }}"></span>:
+                            <span id="seconds{{ test.getTest_id() }}"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         {% endfor %}
     </div>
+
+    <script>
+        function startCountdown(testId, duration) {
+            var timerElement = document.getElementById('countdown' + testId);
+            var minutesElement = document.getElementById('minutes' + testId);
+            var secondsElement = document.getElementById('seconds' + testId);
+            var endTime = new Date().getTime() + duration * 60 * 1000;
+
+            var timerInterval = setInterval(function() {
+                var now = new Date().getTime();
+                var distance = endTime - now;
+
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                minutesElement.textContent = minutes < 10 ? "0" + minutes : minutes;
+                secondsElement.textContent = seconds < 10 ? "0" + seconds : seconds;
+
+                if (distance <= 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('testForm' + testId).submit();
+                }
+            }, 1000);
+        }
+
+        {% for test in tests %}
+            var duration{{ test.getTest_id() }} = {{ test.getDuree() }}; // Duration in minutes
+            startCountdown({{ test.getTest_id() }}, duration{{ test.getTest_id() }});
+        {% endfor %}
+    </script>
 {% endblock %}

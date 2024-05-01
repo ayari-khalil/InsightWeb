@@ -45,4 +45,26 @@ class TestsRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findAllSortedBy(string $sortBy): array
+    {
+        $queryBuilder = $this->createQueryBuilder('t');
+
+        switch ($sortBy) {
+            case 'duree':
+                $queryBuilder->orderBy('t.duree', 'ASC');
+                break;
+            case 'id':
+                $queryBuilder->orderBy('t.test_id', 'ASC');
+                break;
+            case 'note':
+                $queryBuilder->orderBy('t.note', 'ASC');
+                break;
+            // Add additional cases for sorting by other properties if needed
+            default:
+                $queryBuilder->orderBy('t.duree', 'ASC');
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

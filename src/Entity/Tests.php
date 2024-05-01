@@ -25,14 +25,7 @@ class Tests
 /**
  * @ORM\OneToMany(targetEntity=Questions::class, mappedBy="test", cascade={"persist", "remove"}, fetch="EAGER")
  */
-private Collection $questions;
 
-
-    public function __construct()
-    {
-        $this->test_id = null;
-        $this->questions = new ArrayCollection(); 
-    }
 
 
     public function getTest_id(): ?int

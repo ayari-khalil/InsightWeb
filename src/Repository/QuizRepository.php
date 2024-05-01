@@ -45,4 +45,22 @@ class QuizRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findAllSortedBy(string $sortBy): array
+    {
+        $queryBuilder = $this->createQueryBuilder('q');
+
+        switch ($sortBy) {
+            case 'qid':
+                $queryBuilder->orderBy('q.qid', 'ASC');
+                break;
+            case 'question':
+                $queryBuilder->orderBy('q.question', 'ASC');
+                break;
+            default:
+                $queryBuilder->orderBy('q.qid', 'ASC');
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

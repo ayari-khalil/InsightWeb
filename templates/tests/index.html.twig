@@ -5,6 +5,21 @@
 {% block body %}
     {{ parent() }} 
     <h1>Tests index</h1>
+<form method="GET" action="{{ path('app_tests_index') }}">
+    <select id="filterOption" name="sortBy">
+        <option value="name" {% if app.request.query.get('sortBy') == 'duree' %}selected{% endif %}>Duree</option>
+        <option value="id" {% if app.request.query.get('sortBy') == 'id' %}selected{% endif %}>ID</option>
+        <option value="note" {% if app.request.query.get('sortBy') == 'note' %}selected{% endif %}>Note</option>
+
+        <!-- Add more options if needed -->
+    </select>
+</form>
+<script>
+    // Submit the form when the option is changed
+    document.getElementById('filterOption').addEventListener('change', function() {
+        this.form.submit();
+    });
+</script>
 
     <table class="table">
         <thead>

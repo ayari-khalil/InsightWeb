@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+   <meta charset="utf-8">
     <title>Insight - Create Quiz</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="Free HTML Templates">
@@ -10,23 +10,31 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/main.min.css" rel="stylesheet">
+
     <style>
-        /* Custom Styles */
         .container {
             padding-top: 20px;
         }
 
-        /* Custom alert styles */
-        .custom-alert {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 9999;
-        }
-
         .topbar {
             padding: 10px 0;
+            background-color: #120f2d;
+            color: white;
+        }
+
+        .topbar .row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .topbar .col-lg-6 {
+            display: flex;
+            align-items: center;
+        }
+
+        .topbar .col-lg-6:last-child {
+            justify-content: flex-end;
         }
 
         .navbar-brand {
@@ -56,46 +64,49 @@
         }
 
         .favorite-icon {
-            color: #ccc; /* Default color for unfavorite */
+            color: #ccc; 
             cursor: pointer;
         }
 
         .favorited {
-            color: gold; /* Color for favorite */
+            color: gold; 
         }
 
-        /* Add spacing */
+       
         .mt-3 {
-            margin-top: 1.5rem; /* Medium top margin */
+            margin-top: 1.5rem; 
         }
 
         .mb-3 {
-            margin-bottom: 1.5rem; /* Medium bottom margin */
+            margin-bottom: 1.5rem;
         }
 
         .px-3 {
-            padding-left: 1.5rem; /* Medium horizontal padding */
+            padding-left: 1.5rem; 
             padding-right: 1.5rem;
         }
 
         .py-2 {
-            padding-top: 1rem; /* Small top padding */
-            padding-bottom: 1rem; /* Small bottom padding */
+            padding-top: 1rem;
+            padding-bottom: 1rem; 
+        }
+
+        #calendar-holder {
+            display: none;
         }
     </style>
 </head>
 <body>
 
-<!-- Topbar -->
-<div class="topbar bg-dark">
+<div class="topbar">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-6 text-center text-lg-left text-white py-2">
+            <div class="col-lg-6 text-center text-lg-left">
                 <i class="fa fa-phone-alt mr-2"></i><span>+012 345 6789</span>
                 <span class="px-3">|</span>
                 <i class="fa fa-envelope mr-2"></i><span>info@example.com</span>
             </div>
-            <div class="col-lg-6 text-center text-lg-right text-white py-2">
+            <div class="col-lg-6 text-center text-lg-right">
                 <a class="text-white px-2" href="#"><i class="fab fa-facebook-f"></i></a>
                 <a class="text-white px-2" href="#"><i class="fab fa-twitter"></i></a>
                 <a class="text-white px-2" href="#"><i class="fab fa-linkedin-in"></i></a>
@@ -106,7 +117,6 @@
     </div>
 </div>
 
-<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="#">Insight</a>
@@ -135,16 +145,17 @@
             </form>
         </div>
         <div class="col-lg-6 text-lg-right mb-3">
-            <!-- Use a list icon to toggle favorite tests section -->
-            <i id="toggle-favorite-tests-icon" class="fa fa-th-list mt-3" style="font-size: 24px; cursor: pointer;"></i>
+            <i id="toggle-favorite-tests-icon" class="fa fa-th-list mt-3 mr-2" style="font-size: 24px; cursor: pointer;"></i>
+           
         </div>
     </div>
 
-    <!-- Favorite Tests Section -->
     <div class="mt-3" id="favorite-tests-section" style="display: none;">
         <h2>Favorite Tests</h2>
         <div id="favorite-tests"></div>
     </div>
+
+    
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for test in tests %}
@@ -163,26 +174,27 @@
         {% endfor %}
     </div>
 
-    <!-- reCAPTCHA widget -->
-    <div class="container mt-3">
+    <div class="container mt-3 d-flex justify-content-center">
         <div class="g-recaptcha" data-sitekey="{{ '6Ld9ScspAAAAAH9r4ROQFYhtu2h4ERd3eOQgL0L-' }}"></div>
     </div>
+
+    <div id="custom-alert" class="custom-alert"></div>
 </div>
 
-<!-- Custom alert container -->
-<div id="custom-alert" class="custom-alert"></div>
-
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-Ll2NUY3O8rQoGf1ho7c4kVP9J0CZJc0Tf2A+nzpuSLGuvHDJhI7xkHS1MZXf/IfC" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-WfX2TpDk4wvnWW/9W6ay6qeu8sMGh2fiKxxJ67D6+OPlrV/VU1mtX4A5JFxjyra6" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/main.min.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const favoriteIcons = document.querySelectorAll('.favorite-icon');
         const favoriteTestsSection = document.getElementById('favorite-tests-section');
-        const toggleIcon = document.getElementById('toggle-favorite-tests-icon');
+        const toggleFavoriteIcon = document.getElementById('toggle-favorite-tests-icon');
+        const toggleCalendarIcon = document.getElementById('toggle-calendar-icon');
+        const calendarHolder = document.getElementById('calendar-holder');
 
-        // Load favorites from local storage
         let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-        // Set initial favorite state based on local storage
         favoriteIcons.forEach(icon => {
             const testId = icon.getAttribute('data-id');
             if (favorites.includes(testId)) {
@@ -206,24 +218,20 @@
                     }
                     showCustomAlert(`Test ${testId} removed from favorites.`, 'danger');
                 }
-                // Save favorites to local storage
                 localStorage.setItem('favorites', JSON.stringify(favorites));
 
-                // Update favorite tests section
                 updateFavoriteTests();
             });
         });
 
-        // Function to display custom alert
         function showCustomAlert(message, type) {
             const alertContainer = document.getElementById('custom-alert');
             alertContainer.innerHTML = `<div class="alert alert-${type}" role="alert">${message}</div>`;
             setTimeout(() => {
                 alertContainer.innerHTML = '';
-            }, 3000); // Remove the alert after 3 seconds
+            }, 3000); 
         }
 
-        // Function to update favorite tests section
         function updateFavoriteTests() {
             const favoriteTestsContainer = document.getElementById('favorite-tests');
             if (favorites.length === 0) {
@@ -231,15 +239,13 @@
             } else {
                 favoriteTestsContainer.innerHTML = '<ul>';
                 favorites.forEach(testId => {
-                    // Here you can fetch additional information about the test using its ID
                     favoriteTestsContainer.innerHTML += `<li>Test ID: ${testId}</li>`;
                 });
                 favoriteTestsContainer.innerHTML += '</ul>';
             }
         }
 
-        // Toggle visibility of favorite tests section when the icon is clicked
-        toggleIcon.addEventListener('click', function () {
+        toggleFavoriteIcon.addEventListener('click', function () {
             if (favoriteTestsSection.style.display === 'none') {
                 favoriteTestsSection.style.display = 'block';
             } else {
@@ -247,26 +253,11 @@
             }
         });
 
-        // Initial update of favorite tests section
+        
+
         updateFavoriteTests();
     });
-    
-        document.getElementById('yourFormId').addEventListener('submit', function(event) {
-            var response = grecaptcha.getResponse();
-            if (response.length === 0) {
-                // If reCAPTCHA is not completed, prevent form submission
-                event.preventDefault();
-                alert('Please complete the reCAPTCHA.');
-            }
-        });
-  
 </script>
 
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-Ll2NUY3O8rQoGf1ho7c4kVP9J0CZJc0Tf2A+nzpuSLGuvHDJhI7xkHS1MZXf/IfC" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-WfX2TpDk4wvnWW/9W6ay6qeu8sMGh2fiKxxJ67D6+OPlrV/VU1mtX4A5JFxjyra6" crossorigin="anonymous"></script>
 </body>
 </html>
