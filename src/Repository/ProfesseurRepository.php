@@ -21,5 +21,26 @@ class ProfesseurRepository extends ServiceEntityRepository
         parent::__construct($registry, Professeur::class);
     }
 
+    public function findAllSortedBy(string $sortBy): array
+    {
+        $qb = $this->createQueryBuilder('p');
+        
+        // Ajouter des conditions pour trier selon le critère choisi
+        switch ($sortBy) {
+            case 'id':
+                $qb->orderBy('p.id', 'ASC');
+                break;
+            case 'ecole':
+                $qb->leftJoin('p.ecole', 'e')->orderBy('e.nom', 'ASC');
+                break;
+            case 'nom':
+            default:
+                $qb->orderBy('p.nom', 'ASC');
+                break;
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
 
 }

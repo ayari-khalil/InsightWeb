@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrat PDF</title>
+    <style>
+        body {
+            font-family: "Arial", sans-serif;
+            color: #333;
+        }
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .contrat-details {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .contrat-details p {
+            margin-bottom: 10px;
+        }
+        .contrat-details p strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Informations sur le contrat</h1>
+    <div class="contrat-details">
+        <p> Identifiant unique attribué au contrat. {{ contrat.id }}</p>
+        <p> La date à laquelle le contrat a été créé. {{ contrat.dateContrat|date('Y-m-d') }} </p>
+        <p> Le nombre de jours pour lesquels le contrat est valide ou disponible.   {{ contrat.nbDays }}</p>
+        <p><strong>École :</strong> Le nom de l'école associée au contrat. {{ contrat.ecole.nom }}</p>
+
+        <p><strong>Description :</strong> Ce contrat est établi en partenariat avec notre prestigieuse école partenaire. Il concerne les services ou produits convenus entre les deux parties.</p>
+        <p><strong>Conditions :</strong> Les conditions générales ou spécifiques du contrat, incluant les obligations et droits des parties impliquées ainsi que les modalités de résiliation ou de renouvellement.</p>
+
+   </div>
+</body>
+</html>
+

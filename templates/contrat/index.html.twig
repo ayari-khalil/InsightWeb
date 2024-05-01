@@ -1,4 +1,4 @@
-{% extends 'default.html.twig' %}
+{% extends 'back.html.twig' %}
 
 {% block title %}Contrat index{% endblock %}
 
@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th>Date_contrat</th>
                 <th>Nb_days</th>
+                <th>Ecole</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,9 +21,12 @@
                 <td>{{ contrat.id }}</td>
                 <td>{{ contrat.dateContrat ? contrat.dateContrat|date('Y-m-d') : '' }}</td>
                 <td>{{ contrat.nbDays }}</td>
+                <td>{{ contrat.ecole.nom }}</td>
+
                 <td>
                     <a href="{{ path('app_contrat_show', {'id': contrat.id}) }}">show</a>
                     <a href="{{ path('app_contrat_edit', {'id': contrat.id}) }}">edit</a>
+                    <a href="{{ path('generatePdf', { 'id': contrat.id }) }}">Générer PDF</a>
                 </td>
             </tr>
         {% else %}

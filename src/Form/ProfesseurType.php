@@ -66,7 +66,7 @@ class ProfesseurType extends AbstractType
         ])
         ->add('ecole', EntityType::class, [
             'class' => Ecole::class, // Spécifiez la classe de votre entité Ecole
-            'choice_label' => 'id', // ou tout autre attribut d'Ecole que vous souhaitez afficher
+            'choice_label' => 'nom', // ou tout autre attribut d'Ecole que vous souhaitez afficher
             'label' => 'École',
             'required' => true,
         ]);

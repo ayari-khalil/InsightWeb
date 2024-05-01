@@ -11,14 +11,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+
 #[Route('/professeur')]
 class ProfesseurController extends AbstractController
 {
     #[Route('/', name: 'app_professeur_index', methods: ['GET'])]
-    public function index(ProfesseurRepository $professeurRepository): Response
+    public function index(Request $request, ProfesseurRepository $professeurRepository): Response
     {
+
+        $sortBy = $request->query->get('sortBy', 'nom'); // Par défaut, trier par nom
+        $professeurs = $professeurRepository->findAllSortedBy($sortBy);
+
+
         return $this->render('professeur/index.html.twig', [
-            'professeurs' => $professeurRepository->findAll(),
+            'professeurs' => $professeurs,
         ]);
     }
 

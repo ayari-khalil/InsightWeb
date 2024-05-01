@@ -109,7 +109,9 @@ app_entrprise_delete:
     controller: App\Controller\EntrpriseController::delete
     methods: POST
 
-
-
-
-
+generatePdf:
+    path: '/generatePdf/{id}'
+    controller: 'App\Controller\ContratController::generatePdf'
+    methods: ['GET']
+    requirements:
+        id: '\d+'

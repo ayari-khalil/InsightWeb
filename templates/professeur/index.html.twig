@@ -1,4 +1,4 @@
-{% extends 'default.html.twig' %}
+{% extends 'back.html.twig' %}
 
 {% block title %}Professeur index{% endblock %}
 
@@ -24,6 +24,8 @@
                 <td>{{ professeur.prenom }}</td>
                 <td>{{ professeur.numTel }}</td>
                 <td>{{ professeur.adresse }}</td>
+                <td>{{ professeur.ecole.nom }}</td> {# Accès au nom de l'école associée #}
+
                 <td>
                     <a href="{{ path('app_professeur_show', {'id': professeur.id}) }}">show</a>
                     <a href="{{ path('app_professeur_edit', {'id': professeur.id}) }}">edit</a>
