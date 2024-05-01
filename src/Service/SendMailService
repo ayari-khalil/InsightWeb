@@ -1,0 +1,30 @@
+<?php
+namespace App\Service;
+
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+
+class MailService
+{
+    private $mailer;
+
+    public function __construct(MailerInterface $mailer)
+    {
+        $this->mailer = $mailer;
+    }
+
+    public function sendEmailWithAttachment($recipientEmail, $pdfFilePath)
+    {
+        $email = (new Email())
+            ->from('ilyess.saoudi@gmail.com')
+            ->to($recipientEmail)
+            ->subject('PDF Attachment')
+            ->text('Please find the PDF attachment.');
+
+        // Attach the PDF file
+        $email->attachFromPath($pdfFilePath);
+
+        // Send the email
+        $this->mailer->send($email);
+    }
+}

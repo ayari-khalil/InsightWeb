@@ -1,0 +1,95 @@
+{# readD.html.twig #}
+
+{% extends 'back.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block content %}
+<script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var containers = document.querySelectorAll('.qrcode-container');
+        containers.forEach(function(container) {
+            var reference = container.dataset.reference;
+            var qrcode = new QRCode(container, {
+                text: reference,
+                width: 100,
+                height: 100
+            });
+        });
+    });
+</script>
+
+                <!-- Content Area -->
+<br>
+
+                <a href="{{ path('app_diplome_stat')}}" class="nice-button">Statistique</a>
+<br>
+                <div class="container mt-3">
+                    <h1>List Diploma</h1>
+                    <table class="table">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>date_debut</th>
+            <th>date_fin</th>
+            <th>mention</th>
+            <th>Action</th> <!-- Ajout d'une colonne pour les actions -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for d in diplome %}
+        <tr>
+            <td>{{ d.getId() }}</td>
+            <td>{{ d.getDateDebut()|date('Y-m-d') }}</td> 
+            <td>{{ d.getDateFin()|date('Y-m-d') }}</td>
+            <td>
+            <div class="qrcode-container" data-reference="{{ d.getMention() }}"></div>
+             </td> 
+            <td>
+                <a href="{{ path('deleteDiplome', {'id': d.id}) }}" class="btn btn-danger">Supprimer</a>
+
+                <a href="{{ path('editDiplome', {'id': d.getId()}) }}" class="btn btn-primary">Éditer</a>
+
+                {# <a href="{{ path('generatePdf', { 'id': d.id }) }}" class="btn btn-primary">Générer PDF</a>#}
+                <a href="{{ path('generate_pdf_and_send_email', {'id': d.getId()}) }}" class="btn btn-primary">Generate PDF and Send Email</a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div style="text-align: center;">
+                        <a href="{{ path('addDiplome') }}" class="btn btn-primary">Ajouter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {% block stylesheets %}
+<style>
+button.nice-button, a.nice-button {
+  padding: 0.4em 0.8em; /* Ajuster les valeurs de padding pour réduire la taille */
+  border: 4px solid #007bff;
+  transition: ease-in-out 0.3s;
+  background-color: transparent;
+  color: #007bff;
+  font-weight: bolder;
+  font-size: 16px;
+  max-width: 200px; /* Définir une largeur maximale */
+  text-decoration: none; /* Supprimer la décoration du lien */
+  display: inline-block; /* Assurer le comportement de bloc */
+  text-align: center; /* Centrer le texte */
+}
+
+button.nice-button:hover, a.nice-button:hover {
+  transform: scale(1.2) rotate(10deg);
+  background-color: #007bff;
+  color: white;
+}
+</style>
+{% endblock %}
+
+    {% endblock %}

@@ -1,0 +1,11 @@
+controllers:
+    resource: ../src/Controller/
+    type: attribute
+app:
+    resource: '../src/Controller/'
+    type: annotation
+
+
+generate_pdf_and_send_email:
+    path: /generate-pdf-and-send-email/{id}
+    controller: App\Controller\DiplomeController::generatePdfAndSendEmail

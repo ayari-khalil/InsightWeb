@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insight</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid p-0">
+        <div class="row">
+            <!-- Sidebar Start -->
+            <div class="col-md-3 col-lg-2 pe-0 pb-3">
+                <nav class="sidebar navbar navbar-light bg-light  ">
+                    <a href="index.html" class="navbar-brand mx-4 mb-3">
+                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>Insight</h3>
+                    </a>
+                    <div class="d-flex align-items-center ms-4 mb-4">
+                        <div class="position-relative">
+                            <img class="rounded-circle" src="/img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                            <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                        </div>
+                        <div class="ms-3">
+                              <h5 class="mb-0" style="margin-bottom: 0;">utilisateur</h5>
+                            <span>Admin</span>
+                        </div>
+                    </div>
+                    <div class="navbar-nav w-100">
+    <a href="{{ path('app_home') }}" class="nav-item nav-link{% if app.request.attributes.get('_route') == 'app_home' %} active{% endif %}">
+        <i class="fa fa-tachometer-alt me-2"></i>Dashboard
+    </a>
+    <a href="{{ path('read') }}" class="nav-item nav-link{% if app.request.attributes.get('_route') == 'read' %} active{% endif %}">
+        <i class="fa fa-th me-2"></i>Training
+    </a>
+    <a href="{{ path('readCours') }}" class="nav-item nav-link{% if app.request.attributes.get('_route') == 'app_cours' %} active{% endif %}">
+        <i class="fa fa-keyboard me-2"></i>Courses
+    </a>
+    <a href="{{ path('readDiplome') }}" class="nav-item nav-link{% if app.request.attributes.get('_route') == 'app_diplome' %} active{% endif %}">
+        <i class="fa fa-table me-2"></i>Diploma
+    </a>
+</div>
+                </nav>
+            </div>
+            <!-- Sidebar End -->
+
+
+            <!-- Content Start -->
+            <div class="col-md-9 col-lg-10">
+                <!-- Navbar Start -->
+                <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+                    <form class="d-none d-md-flex ms-4">
+                        <input id="searchInput" class="form-control border-0" aria-controls="DataTables_Table_0" type="search" placeholder="Search">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<button class="btn" type="button" style="background-color: transparent; border: none;" onclick="startSpeechRecognition()">
+    <i class="bi bi-mic" style="color: black;"></i> <!-- Bootstrap Icons microphone icon -->
+</button>
+                    </form>
+                    <div class="navbar-nav align-items-center ms-auto">
+                        <!-- Your Navbar Links Here -->
+                    </div>
+                    <div class="navbar-nav align-items-center ms-auto ">
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                <i class="fa fa-envelope me-lg-2"></i>
+                                <span class="d-none d-lg-inline-flex">Message</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                                <hr class="dropdown-divider">
+                                <a href="#" class="dropdown-item text-center">See all message</a>
+                            </div>
+                        </div>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                <i class="fa fa-bell me-lg-2"></i>
+                                <span class="d-none d-lg-inline-flex">Notification</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                                <hr class="dropdown-divider">
+                                <a href="#" class="dropdown-item">New Notification 1</a>
+                                <a href="#" class="dropdown-item">New Notification 2</a>
+                                <a href="#" class="dropdown-item">New Notification 3</a>
+                            </div>
+                        </div>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                <span class="d-none d-lg-inline-flex">Admin</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                                <!-- Dropdown content -->
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <!-- Navbar End -->
+{% block content %}{% endblock %}
+            
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+<script>
+    // Fonction pour effectuer la recherche dynamique
+    function searchBase(keyword) {
+        var tableRows = document.querySelectorAll('.table tbody tr');
+        var searchInput = keyword.trim().toLowerCase();
+
+        tableRows.forEach(function (row) {
+            var cells = row.querySelectorAll('td');
+            var found = false;
+
+            cells.forEach(function (cell) {
+                if (cell.textContent.trim().toLowerCase().includes(searchInput)) {
+                    found = true;
+                }
+            });
+
+            if (found) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    // Fonction pour démarrer la reconnaissance vocale
+    function startSpeechRecognition() {
+        // Démarrer la reconnaissance vocale
+        const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+        recognition.lang = 'fr-FR'; // Définir la langue de la reconnaissance vocale (facultatif)
+        recognition.start();
+
+        // Écouter les résultats de la reconnaissance vocale
+        recognition.onresult = function(event) {
+            const recognizedText = event.results[0][0].transcript.trim(); // Récupérer le texte reconnu
+            const cleanedText = recognizedText.endsWith('.') ? recognizedText.slice(0, -1) : recognizedText; // Supprimer le dernier caractère s'il s'agit d'un point
+            document.getElementById('searchInput').value = cleanedText; // Afficher le résultat dans le champ de recherche
+
+            // Appel de la fonction de recherche lorsque du texte est reconnu
+            searchBase(cleanedText); 
+        };
+
+        // Gérer les erreurs éventuelles de la reconnaissance vocale
+        recognition.onerror = function(event) {
+            console.error('Erreur de reconnaissance vocale:', event.error);
+        };
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Event listener pour la saisie clavier
+        var searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.addEventListener('keyup', function () {
+                var searchText = this.value;
+                searchBase(searchText);
+            });
+        }
+    });
+</script>
+
+</body>
+
+</html>

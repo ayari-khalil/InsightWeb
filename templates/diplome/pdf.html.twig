@@ -1,0 +1,35 @@
+<!-- pdf.html.twig -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document PDF</title>
+    <style>
+        /* Ajoutez vos styles CSS ici */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: blue;
+        }
+        .diplome-details {
+            margin-top: 20px;
+        }
+        .diplome-details p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Informations sur le diplôme</h1>
+    <div class="diplome-details">
+        <p>Nom: Khalil ayari</p>
+        <p><strong>Date de début:</strong> {{ diplome.dateDebut|date('Y-m-d') }}</p>
+        <p><strong>Date de fin:</strong> {{ diplome.dateFin|date('Y-m-d') }}</p>
+        <p><strong>Mention:</strong> {{ diplome.mention }}</p>
+    </div>
+
+
+</body>
+</html>

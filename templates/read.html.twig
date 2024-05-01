@@ -1,0 +1,39 @@
+{# read.html.twig #}
+{% extends 'back.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block content %}
+
+                <!-- Content Area -->
+                <div class="container mt-3">
+                    <h1>List Training</h1>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>nom</th>
+                                <th>domaine</th>
+                                <th>montant</th>
+                                <th>Action</th> <!-- Ajout d'une colonne pour les actions -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for f in formations %}
+                            <tr>
+                                <td>{{ f.id }}</td>
+                                <td>{{ f.nom }}</td>
+                                <td>{{ f.domaine }}</td>
+                                <td>{{ f.montant }}</td>
+                            <td>         
+                             <a href="{{ path('formation_delete', {'id': f.id}) }}" class="btn btn-danger">Supprimer</a>
+                             <a href="{{ path('app_edit', {'id': f.getId()}) }}" class="btn btn-primary">Éditer</a>
+                            </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div style="text-align: center;">
+                        <a href="{{ path('addDiplome') }}" class="btn btn-primary">Ajouter</a>
+                    </div>
+                </div>
+            {% endblock %}

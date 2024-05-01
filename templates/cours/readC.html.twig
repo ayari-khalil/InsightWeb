@@ -1,0 +1,49 @@
+{# readC.html.twig #}
+{% extends 'back.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block content %}
+                    <!-- Content Area -->
+                <div class="container mt-3">
+                    <h1>List Courses</h1>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Ref</th>
+                                <th>Formation</th>
+                                <th>Nom</th>
+                                <th>File</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Intégration du bloc de contenu des formations ici -->
+                            {% block parent_content %}
+                                {% if cours is not empty %}
+                                    {% for c in cours %}
+                                    <tr>
+                                        <td>{{ c.ref }}</td>
+                                        <td>{{ c.formation.nom }}</td>
+                                        <td>{{ c.nom }}</td>
+                                        <td>{{ c.file }}</td>
+                                        
+                                          <td>         
+                             <a href="{{ path('deleteCours', {'ref':c.ref }) }}" class="btn btn-danger">Supprimer</a>
+                             <a href="{{ path('editCours', {'ref': c.getRef()}) }}" class="btn btn-primary">Éditer</a>
+                            </td>
+                                       
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="5">Aucune formation disponible</td>
+                                    </tr>
+                                {% endif %}
+                            {% endblock %}
+                        </tbody>
+                    </table>
+                    <div style="text-align: center;">
+                        <a href="{{ path('addCours') }}" class="btn btn-primary">Ajouter</a>
+                    </div>
+                </div>
+          {% endblock %}
