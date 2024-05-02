@@ -16,17 +16,34 @@ use Symfony\Component\Routing\Attribute\Route;
 class ProfesseurController extends AbstractController
 {
     #[Route('/', name: 'app_professeur_index', methods: ['GET'])]
-    public function index(Request $request, ProfesseurRepository $professeurRepository): Response
-    {
+public function index(Request $request, ProfesseurRepository $professeurRepository): Response
+{
+    $sortBy = $request->query->get('sortBy', 'nom'); // Par défaut, trier par nom
 
-        $sortBy = $request->query->get('sortBy', 'nom'); // Par défaut, trier par nom
-        $professeurs = $professeurRepository->findAllSortedBy($sortBy);
-
-
-        return $this->render('professeur/index.html.twig', [
-            'professeurs' => $professeurs,
-        ]);
+    // Vérifiez la valeur sélectionnée dans le menu déroulant et définissez la propriété de tri en conséquence
+    switch ($sortBy) {
+        case 'name':
+            $sortByProperty = 'nom';
+            break;
+        case 'id':
+            $sortByProperty = 'id';
+            break;
+        case 'ecole':
+            $sortByProperty = 'ecole.nom';
+            break;
+        case 'prenom':
+            $sortByProperty = 'prenom';
+            break;
+        default:
+            $sortByProperty = 'nom'; // Par défaut, trier par nom
     }
+
+    $professeurs = $professeurRepository->findAllSortedBy($sortByProperty);
+
+    return $this->render('professeur/index.html.twig', [
+        'professeurs' => $professeurs,
+    ]);
+}
 
     #[Route('/new', name: 'app_professeur_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response

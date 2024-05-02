@@ -13,10 +13,27 @@
                 <th>Prenom</th>
                 <th>Num_tel</th>
                 <th>Adresse</th>
+                <th>Ecole</th>
                 <th>actions</th>
+
             </tr>
         </thead>
         <tbody>
+            <form method="GET" action="{{ path('app_professeur_index') }}">
+                <select id="filterOption" name="sortBy">
+                    <option value="nom" {% if app.request.query.get('sortBy') == 'nom' %}selected{% endif %}>Nom</option>
+                    <option value="id" {% if app.request.query.get('sortBy') == 'id' %}selected{% endif %}>ID</option>
+                    <option value="ecole" {% if app.request.query.get('sortBy') == 'ecole.' %}selected{% endif %}>École</option>
+                    <option value="prenom" {% if app.request.query.get('sortBy') == 'prenom.' %}selected{% endif %}>Prenom</option>
+
+                </select>
+            </form>
+            <script>
+                // Lorsque l'option est modifiée, soumettre le formulaire
+                document.getElementById('filterOption').addEventListener('change', function() {
+                    this.form.submit();
+                });
+            </script>
         {% for professeur in professeurs %}
             <tr>
                 <td>{{ professeur.id }}</td>
@@ -27,8 +44,8 @@
                 <td>{{ professeur.ecole.nom }}</td> {# Accès au nom de l'école associée #}
 
                 <td>
-                    <a href="{{ path('app_professeur_show', {'id': professeur.id}) }}">show</a>
-                    <a href="{{ path('app_professeur_edit', {'id': professeur.id}) }}">edit</a>
+                    <a href="{{ path('app_professeur_show', {'id': professeur.id}) }}"  class="btn btn-primary btn-sm">show</a>
+                    <a href="{{ path('app_professeur_edit', {'id': professeur.id}) }}" class="btn btn-danger btn-sm delete-button">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +56,11 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_professeur_new') }}">Create new</a>
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="text-center">
+    <a href="{{ path('app_professeur_new') }}" class="btn btn-primary">Create new</a>
+</div>
+</div>
+</div>
 {% endblock %}

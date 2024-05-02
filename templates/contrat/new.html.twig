@@ -3,10 +3,16 @@
 {% block title %}New Contrat{% endblock %}
 
 {% block body %}
+    <div class="container">
+        <div class="row justify-content-center">
 
-    <h1>Create new Ecole</h1>
+
+    <h1 class="text-center">Create new Ecole</h1>
 
     {{ include('contrat/_form.html.twig') }}
-
+    <div class="col-md-2">
     <a href="{{ path('app_contrat_index') }}">back to list</a>
+</div>
+</div>
+</div>
 {% endblock %}

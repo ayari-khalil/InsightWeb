@@ -23,8 +23,8 @@
                 <td>{{ entreprise.adresse }}</td>
                 <td>{{ entreprise.numTel }}</td>
                 <td>
-                    <a href="{{ path('app_entrprise_show', {'id': entreprise.id}) }}">show</a>
-                    <a href="{{ path('app_entrprise_edit', {'id': entreprise.id}) }}">edit</a>
+                    <a href="{{ path('app_entrprise_show', {'id': entreprise.id}) }}"  class="btn btn-primary btn-sm">show</a>
+                    <a href="{{ path('app_entrprise_edit', {'id': entreprise.id}) }}" class="btn btn-danger btn-sm delete-button">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +35,11 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_entrprise_new') }}">Create new</a>
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="text-center">
+    <a href="{{ path('app_entrprise_new') }}" class="btn btn-primary">Create new</a>
+</div>
+</div>
+</div>
 {% endblock %}

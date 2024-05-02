@@ -17,12 +17,32 @@ use Dompdf\Options;
 class ContratController extends AbstractController
 {
     #[Route('/', name: 'app_contrat_index', methods: ['GET'])]
-    public function index(ContratRepository $contratRepository): Response
+    public function index(Request $request, ContratRepository $contratRepository): Response
     {
+        $sortBy = $request->query->get('sortBy', 'dateContrat'); // Par défaut, trier par date de contrat
+    
+        // Vérifiez la valeur sélectionnée dans le menu déroulant et définissez la propriété de tri en conséquence
+        switch ($sortBy) {
+            case 'dateContrat':
+                $sortByProperty = 'dateContrat';
+                break;
+            case 'id':
+                $sortByProperty = 'id';
+                break;
+            case 'ecole':
+                $sortByProperty = 'ecole';
+                break;
+            default:
+                $sortByProperty = 'dateContrat'; // Par défaut, trier par date de contrat
+        }
+    
+        $contrats = $contratRepository->findAllSortedBy($sortByProperty);
+    
         return $this->render('contrat/index.html.twig', [
-            'contrats' => $contratRepository->findAll(),
+            'contrats' => $contrats,
         ]);
     }
+    
 
     #[Route('/new', name: 'app_contrat_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -135,5 +155,8 @@ public function delete(Request $request, Contrat $contrat, EntityManagerInterfac
         // Retourner la réponse HTTP avec le PDF généré
         return $response;
     }
+
+
+    
 
 }

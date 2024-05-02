@@ -28,6 +28,12 @@ class ContratType extends AbstractType
                     new NotBlank(), 
                 ],
             ])
+            ->add('ecole', EntityType::class, [
+                'class' => Ecole::class,
+                'choice_label' => 'nom', // ou tout autre attribut d'Ecole que vous souhaitez afficher
+                'label' => 'École',
+                'required' => true,
+            ])
             ->add('nb_days', IntegerType::class, [
                 'label' => 'Number of Days',
                 'constraints' => [
@@ -37,13 +43,8 @@ class ContratType extends AbstractType
                         'message' => 'The value {{ value }} is not a valid {{ type }}.',
                     ]),
                 ],
-            ])
-            ->add('ecole', EntityType::class, [
-                'class' => Ecole::class,
-                'choice_label' => 'id', // ou tout autre attribut d'Ecole que vous souhaitez afficher
-                'label' => 'École',
-                'required' => true,
             ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

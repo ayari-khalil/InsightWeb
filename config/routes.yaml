@@ -81,7 +81,10 @@ app_professeur_delete:
     methods: ['POST']
 
 
-
+map:
+    path: /map
+    controller: App\Controller\EcoleController::map
+    methods: ['GET']
 
 
 app_entrprise_index:

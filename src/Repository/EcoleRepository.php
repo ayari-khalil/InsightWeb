@@ -45,4 +45,28 @@ class EcoleRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findAllSortedBy(string $sortBy): array
+{
+    $queryBuilder = $this->createQueryBuilder('e');
+
+    switch ($sortBy) {
+        case 'nom':
+            $queryBuilder->orderBy('e.nom', 'ASC');
+            break;
+        case 'id':
+            $queryBuilder->orderBy('e.id', 'ASC');
+            break;
+        case 'nb_professeur':
+            // Si vous avez une relation directe avec les professeurs, vous pouvez trier par le nombre de professeurs
+            // Sinon, vous devrez peut-être ajouter une jointure et utiliser COUNT()
+            $queryBuilder->orderBy('e.nb_professeur', 'ASC');
+            break;
+        default:
+            $queryBuilder->orderBy('e.nom', 'ASC');
+    }
+
+    return $queryBuilder->getQuery()->getResult();
+}
+
 }

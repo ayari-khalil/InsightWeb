@@ -14,13 +14,33 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/ecole')]
 class EcoleController extends AbstractController
 {
-    #[Route('/ecoles', name: 'app_ecole_index', methods: ['GET'])]
-    public function index(EcoleRepository $ecoleRepository): Response
+    #[Route('/', name: 'app_ecole_index', methods: ['GET'])]
+    public function index(Request $request, EcoleRepository $ecoleRepository): Response
     {
+        $sortBy = $request->query->get('sortBy', 'nom'); // Par défaut, trier par nom
+    
+        // Vérifiez la valeur sélectionnée dans le menu déroulant et définissez la propriété de tri en conséquence
+        switch ($sortBy) {
+            case 'nom':
+                $sortByProperty = 'nom';
+                break;
+            case 'id':
+                $sortByProperty = 'id';
+                break;
+            case 'nb_professeur':
+                $sortByProperty = 'nb_professeur';
+                break;
+            default:
+                $sortByProperty = 'nom'; // Par défaut, trier par nom
+        }
+    
+        $ecoles = $ecoleRepository->findAllSortedBy($sortByProperty);
+    
         return $this->render('ecole/index.html.twig', [
-            'ecoles' => $ecoleRepository->findAll(),
+            'ecoles' => $ecoles,
         ]);
     }
+    
 
     #[Route('/new', name: 'app_ecole_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -88,4 +108,10 @@ public function showEcoleList(EcoleRepository $ecoleRepository): Response
         'ecoles' => $ecoles,
     ]);
 }
+#[Route('/map', name: 'map')]
+public function map(): Response
+{
+    return $this->render('ecole/maps.html.twig');
+}
+
 }

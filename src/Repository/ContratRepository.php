@@ -45,4 +45,26 @@ class ContratRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    public function findAllSortedBy(string $sortBy): array
+{
+    $queryBuilder = $this->createQueryBuilder('c');
+
+    switch ($sortBy) {
+        case 'dateContrat':
+            $queryBuilder->orderBy('c.dateContrat', 'ASC');
+            break;
+        case 'id':
+            $queryBuilder->orderBy('c.id', 'ASC');
+            break;
+        case 'ecole':
+
+            $queryBuilder->join('c.ecole', 'e')->orderBy('e.nom', 'ASC');
+            break;
+        default:
+            $queryBuilder->orderBy('c.dateContrat', 'ASC');
+    }
+
+    return $queryBuilder->getQuery()->getResult();
+}
+
 }

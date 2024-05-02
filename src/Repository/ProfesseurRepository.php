@@ -20,27 +20,34 @@ class ProfesseurRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Professeur::class);
     }
-
+/**
+     * Récupère tous les professeurs triés par la colonne spécifiée.
+     *
+     * @param string $sortBy La colonne par laquelle trier les professeurs
+     * @return Professeur[] Tableau de professeurs triés
+     */
     public function findAllSortedBy(string $sortBy): array
     {
-        $qb = $this->createQueryBuilder('p');
-        
-        // Ajouter des conditions pour trier selon le critère choisi
+        $queryBuilder = $this->createQueryBuilder('p');
+
         switch ($sortBy) {
-            case 'id':
-                $qb->orderBy('p.id', 'ASC');
-                break;
-            case 'ecole':
-                $qb->leftJoin('p.ecole', 'e')->orderBy('e.nom', 'ASC');
-                break;
             case 'nom':
-            default:
-                $qb->orderBy('p.nom', 'ASC');
+                $queryBuilder->orderBy('p.nom', 'ASC');
                 break;
+            case 'id':
+                $queryBuilder->orderBy('p.id', 'ASC');
+                break;
+            case 'prenom':
+                 $queryBuilder->orderBy('p.prenom', 'ASC');
+                break;        
+            case 'ecole.nom':
+                $queryBuilder->join('p.ecole', 'e')->orderBy('e.nom', 'ASC');
+                break;
+            default:
+                $queryBuilder->orderBy('p.nom', 'ASC');
         }
 
-        return $qb->getQuery()->getResult();
+        return $queryBuilder->getQuery()->getResult();
     }
-
 
 }

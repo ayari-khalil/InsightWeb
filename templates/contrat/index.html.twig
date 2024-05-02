@@ -5,6 +5,20 @@
 {% block body %}
     <h1>Contrat index</h1>
 
+    <form method="GET" action="{{ path('app_contrat_index') }}">
+        <select id="filterOption" name="sortBy">
+            <option value="dateContrat" {% if app.request.query.get('sortBy') == 'dateContrat' %}selected{% endif %}>Date de contrat</option>
+            <option value="id" {% if app.request.query.get('sortBy') == 'id' %}selected{% endif %}>ID</option>
+            <option value="ecole" {% if app.request.query.get('sortBy') == 'ecole' %}selected{% endif %}>École</option>
+        </select>
+    </form>
+    <script>
+        // Lorsque l'option est modifiée, soumettre le formulaire
+        document.getElementById('filterOption').addEventListener('change', function() {
+            this.form.submit();
+        });
+    </script>
+    
     <table class="table">
         <thead>
             <tr>
@@ -24,9 +38,9 @@
                 <td>{{ contrat.ecole.nom }}</td>
 
                 <td>
-                    <a href="{{ path('app_contrat_show', {'id': contrat.id}) }}">show</a>
-                    <a href="{{ path('app_contrat_edit', {'id': contrat.id}) }}">edit</a>
-                    <a href="{{ path('generatePdf', { 'id': contrat.id }) }}">Générer PDF</a>
+                    <a href="{{ path('app_contrat_show', {'id': contrat.id}) }}"  class="btn btn-primary btn-sm">show</a>
+                    <a href="{{ path('app_contrat_edit', {'id': contrat.id}) }}" class="btn btn-danger btn-sm delete-button">edit</a>
+                    <a href="{{ path('generatePdf', { 'id': contrat.id }) }}" class="btn btn-danger btn-sm delete-button">Générer PDF</a>
                 </td>
             </tr>
         {% else %}
@@ -36,6 +50,15 @@
         {% endfor %}
         </tbody>
     </table>
+  
 
-    <a href="{{ path('app_contrat_new') }}">Create new</a>
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="text-center">
+    <a href="{{ path('app_contrat_new') }}" class="btn btn-primary">Create new</a>
+</div>
+</div>
+</div>
+
 {% endblock %}
+

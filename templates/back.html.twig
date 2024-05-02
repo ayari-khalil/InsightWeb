@@ -179,12 +179,8 @@
 
                             </ul>
                         </div>
-                        <select id="filterOption">
-                            <option value="name">Name</option>
-                            <option value="id">ID</option>
-                            <option value="ecole.nom">Ecole</option>
-
-                        </select>
+                        
+                       
                     </div>
                 </nav>
                 {% block body %}{% endblock %}
@@ -218,38 +214,7 @@
             });
         });
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Fonction pour filtrer les lignes en fonction de l'option sélectionnée
-            function filterRows(option) {
-                var rows = document.querySelectorAll('.table tbody tr');
     
-                rows.forEach(function (row) {
-                    var rowData = "";
-                    if (option === 'name') {
-                        // Obtenez le contenu de la colonne de nom (suppose que la classe est "name-column")
-                        rowData = row.querySelector('.name-column').textContent.toLowerCase();
-                    } else if (option === 'id') {
-                        // Obtenez le contenu de la colonne d'ID (suppose que la classe est "id-column")
-                        rowData = row.querySelector('.id-column').textContent.toLowerCase();
-                    }
-    
-                    // Afficher ou masquer la ligne en fonction de l'option sélectionnée
-                    if (rowData.includes(option.toLowerCase()) || option === 'all') {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-            }
-    
-            // Gestionnaire d'événements pour le changement de sélection dans l'élément de sélection
-            document.getElementById('filterOption').addEventListener('change', function () {
-                var selectedOption = this.value; // Récupérer la valeur de l'option sélectionnée
-                filterRows(selectedOption); // Filtrer les lignes en fonction de l'option sélectionnée
-            });
-        });
-    </script>
 
     <!-- Template Javascript -->
     <script src="{{ asset('back/js/main.js') }}"></script>

@@ -1,5 +1,8 @@
 {% block body %}
 <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
     {{ form_start(form) }}
     <div class="form-group">
         {{ form_label(form.date_contrat) }}
@@ -12,6 +15,9 @@
         {{ form_widget(form.nb_days) }}
         {{ form_errors(form.nb_days) }}
     </div>
+</div>
+
+</div>
 
        
 

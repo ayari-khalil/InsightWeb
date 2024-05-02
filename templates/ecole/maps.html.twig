@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+ @license
+ Copyright 2024 Google LLC. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+-->
+<html>
+  <head>
+    <title>Complex Marker Icons</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <style>
+      /**
+       * @license
+       * Copyright 2024 Google LLC. All Rights Reserved.
+       * SPDX-License-Identifier: Apache-2.0
+       */
+
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+
+      /* Shift the flag icon to the right so that the bottom of the flagpole
+       * aligns with the anchor point. */
+      .flag-icon {
+        position: relative;
+        left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <gmp-map center="36.9,10.1" zoom="5" map-id="DEMO_MAP_ID">
+      <gmp-advanced-marker position="36.900556, 10.1613999" title="Coogee Beach">
+        <img class="flag-icon"
+             src="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"/>
+      </gmp-advanced-marker>
+      <gmp-advanced-marker position="37.2669942, 9.8699558" title="Cronulla Beach">
+        <img class="flag-icon"
+             src="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"/>
+      </gmp-advanced-marker>
+
+
+      <gmp-advanced-marker position="46.900556, 12.1613999" title="Coogee Beach">
+        <img class="flag-icon"
+             src="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"/>
+      </gmp-advanced-marker>
+      
+      
+    </gmp-map>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCqTa7_RXz8n5WlqEzSE1qjcGxoaI77N4&loading=async&libraries=marker&v=beta&solution_channel=GMP_CCS_complexmarkers_v2"
+      defer
+    ></script>
+  </body>
+</html>
