@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Professeur index{% endblock %}
+
+{% block body %}
+    <h1>Professeur index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>BirthDate</th>
+                <th>PhoneNumber</th>
+                <th>Cin</th>
+                <th>Role</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for professeur in professeurs %}
+            <tr>
+                <td>{{ professeur.id }}</td>
+                <td>{{ professeur.email }}</td>
+                <td>{{ professeur.password }}</td>
+                <td>{{ professeur.firstName }}</td>
+                <td>{{ professeur.lastName }}</td>
+                <td>{{ professeur.birthDate ? professeur.birthDate|date('Y-m-d') : '' }}</td>
+                <td>{{ professeur.phoneNumber }}</td>
+                <td>{{ professeur.cin }}</td>
+                <td>{{ professeur.role }}</td>
+                <td>
+                    <a href="{{ path('app_professeur_show', {'id': professeur.id}) }}">show</a>
+                    <a href="{{ path('app_professeur_edit', {'id': professeur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_professeur_new') }}">Create new</a>
+{% endblock %}

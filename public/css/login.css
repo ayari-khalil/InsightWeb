@@ -1,0 +1,123 @@
+/* POPPINS FONT */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+*{
+    font-family: 'Poppins', sans serif;
+}
+body{
+    background-image: url("../img/blueBackground.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+.box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+.container {
+    width: 400px; /* Adjust the width as needed */
+    display: flex;
+    flex-direction: column;
+    padding: 20px; /* Add padding to create space around the form and buttons */
+    margin-top: 50px; /* Adjust margin-top to create space between navbar and form */
+    margin-bottom: 50px; /* Adjust margin-bottom to create space at the bottom */
+    align-items: center; /* Align items horizontally */
+}
+
+.input-field {
+    width: 100%; /* Make the input field stretch to fill the container width */
+    margin-bottom: 10px; /* Add margin between input field and buttons */
+}
+
+.submit {
+    width: auto; /* Let the button adjust its width based on content */
+    padding: 8px 20px; /* Adjust padding to reduce button size */
+    background-color: white; /* Change background color to white */
+    color: #007bff; /* Change text color */
+    border: 2px solid #007bff; /* Add border */
+    border-radius: 25px; /* Add border radius to make it round */
+    cursor: pointer; /* Add pointer cursor */
+    transition: background-color 0.3s, color 0.3s; /* Add transition effect for hover */
+}
+
+.submit:hover {
+    background-color: #007bff; /* Change background color on hover */
+    color: white; /* Change text color on hover */
+}
+
+
+
+
+
+span{
+    color: #fff;
+    font-size: small;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 10px 0;
+}
+header{
+    color: #fff;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 10px 0;
+}
+.input-field{
+    display: flex;
+    flex-direction: column;
+}
+.input-field .input{
+    height: 45px;
+    width: 87%;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    color: #fff;
+    padding: 0 0 0 42px;
+    background: rgba(255,255,255,0.1);
+}
+i{
+    position: relative;
+    top: -31px;
+    left: 17px;
+    color: #fff;
+}
+::-webkit-input-placeholder{
+    color: #fff;
+}
+
+
+
+.bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: small;
+    color: #fff;
+    margin-top: 10px;
+}
+.left{
+    display: flex;
+}
+label a{
+    color: #fff;
+    text-decoration: none;
+}
+.navbar {
+    background-color: white;
+}
+
+.navbar .navbar-brand h1 {
+    color: blue;
+}
+
+.navbar-nav .nav-link {
+    color: blue !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: darkblue !important;
+}

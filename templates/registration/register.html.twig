@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <title>INSIGHT | Register</title>
+</head>
+<body>
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 px-lg-5">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>INSIGHT</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="course.html">Courses</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="detail.html">Course Detail</a>
+                            <a class="dropdown-item" href="feature.html">Our Features</a>
+                            <a class="dropdown-item" href="team.html">Instructors</a>
+                            <a class="dropdown-item" href="testimonial.html">Testimonial</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <div class="box">
+        <div class="container">
+            <div class="top-header">
+                <span>Don't have an account?</span>
+                <header>Register</header>
+            </div>
+
+            <form method="post" action="{{ path('submitRegister') }}">
+                <div class="input-field">
+                    <input type="text" class="input" placeholder="First Name" name="firstName" required>
+                    <i class="bx bx-user"></i>
+                </div>
+                <div class="input-field">
+                    <input type="text" class="input" placeholder="Last Name" name="lastName" required>
+                    <i class="bx bx-user"></i>
+                </div>
+                <div class="input-field">
+                    <input type="email" class="input" placeholder="Email" name="email" required>
+                    <i class="bx bx-envelope"></i>
+                </div>
+                <div class="input-field">
+                    <input type="text" class="input" placeholder="Birth Date" name="birthDate" required>
+                    <i class="bx bx-calendar"></i>
+                </div>
+                <div class="input-field">
+                    <input type="text" class="input" placeholder="Phone Number" name="phoneNumber" required>
+                    <i class="bx bx-phone"></i>
+                </div>
+                <div class="input-field">
+                    <input type="text" class="input" placeholder="CIN" name="cin" required>
+                    <i class="bx bx-id-card"></i>
+                </div>
+                <div class="input-field">
+                    <input type="password" class="input" placeholder="Password" name="password" required>
+                    <i class="bx bx-lock-alt"></i>
+                </div>
+                <div class="input-field">
+                    <input type="submit" class="submit" value="Register">
+                </div>
+            </form>
+
+            <div class="bottom">
+                <div class="left">
+                    <label><a href="/login">Already have an account?</a></label>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

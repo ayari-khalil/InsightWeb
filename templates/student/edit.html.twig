@@ -1,0 +1,16 @@
+{% extends 'student/studentDashboard.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid pt-4 px-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="h-100 bg-light rounded p-4">
+                    <h1>Edit Student</h1>
+                    <div class="d-flex justify-content-center"> {# Centering the form #}
+                        {{ include('student/_form.html.twig', {'button_label': 'Update'}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
