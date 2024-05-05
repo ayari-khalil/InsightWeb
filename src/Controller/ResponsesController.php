@@ -38,6 +38,7 @@ class ResponsesController extends AbstractController
             'responses' => $responses,
         ]);
     }
+    
 
 
     #[Route('/new', name: 'app_responses_new', methods: ['GET', 'POST'])]
@@ -165,9 +166,9 @@ class ResponsesController extends AbstractController
 
     private function sendVerificationCodeViaSMS(string $pnsup, string $verificationCode): void
     {
-        $twilioSid = "ACac4c325ac7b35efb395ebfe398364a20";
-        $twilioToken = "12150e47791e3c1cec26536de117546e";
-        $twilioPhoneNumber =  "+13343844652";
+        $twilioSid = "AC99bd55ee524e7e9029705a38e6e9dd26";
+        $twilioToken = "8772cd3bde4f55f9c3f88c6f38af6997";
+        $twilioPhoneNumber =  "+14432750337";
         $client = new Client($twilioSid, $twilioToken);
         $smsContent = "Your verification code is: $verificationCode";
 
@@ -179,25 +180,6 @@ class ResponsesController extends AbstractController
                 'body' => $smsContent 
             ]
         );
-    }
-    
-
-    #[Route('/{idres}/edit', name: 'app_responses_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Responses $response, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(ResponsesType::class, $response);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_responses_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('responses/edit.html.twig', [
-            'response' => $response,
-            'form' => $form,
-        ]);
     }
 
     #[Route('/{idres}', name: 'app_responses_delete', methods: ['POST'])]

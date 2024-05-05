@@ -5,6 +5,7 @@
 {% block title %}Responses{% endblock %}
 
 {% block content %}
+
        <!-- Sidebar Start -->
       <div class="sidebar pe-4 pb-3">
         <nav class="navbar bg-light navbar-light">
@@ -73,7 +74,6 @@
                                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ response.idres) }}">
                                                 <button type="submit" class="btn btn-danger me-2">Delete</button>
                                             </form>
-                                            <a href="{{ path('app_responses_edit', {'idres': response.idres}) }}" class="btn btn-primary">Edit</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -84,20 +84,13 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                                    <div class="pagination mt-4">
+                    {{ knp_pagination_render(responses) }}
+                </div>
                 </div>
 
             </div>
-                                <div class="pagination mt-4">
-                    {{ knp_pagination_render(responses) }}
-                </div>
-        </div>
-    </div>
-    <div class="container-fluid pt-4 px-4">
-        <div class="row g-4">
-            <div class="col-12">
-                <div class="bg-light rounded h-100 p-4">
-                </div>
-            </div>
+
         </div>
     </div>
 {% endblock %}
