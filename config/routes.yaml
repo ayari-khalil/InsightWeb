@@ -118,3 +118,18 @@ generatePdf:
     methods: ['GET']
     requirements:
         id: '\d+'
+
+get_coords:
+    path: '/getCoords/{id}'
+    controller: 'App\Controller\EcoleController::getCoordinates'
+    methods: ['GET']
+
+test_geocode:
+    path: /test-geocode
+    controller: App\Controller\EcoleController::testGeocode
+    methods: ['GET']
+
+app_Ecole_Home:
+    path: '/ecolehome'
+    controller: 'App\Controller\EcoleController::recherche'
+    methods: ['GET', 'POST']

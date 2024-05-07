@@ -5,20 +5,32 @@
 {% block body %}
     <h1>Ecole index</h1>
 
+    <div class="col-lg-6 mb-3">
     <form method="GET" action="{{ path('app_ecole_index') }}">
-        <select id="filterOption" name="sortBy">
+        <select id="filterOption" name="sortBy" class="btn btn-primary btn-sm">
             <option value="nom" {% if app.request.query.get('sortBy') == 'nom' %}selected{% endif %}>Nom</option>
             <option value="id" {% if app.request.query.get('sortBy') == 'id' %}selected{% endif %}>ID</option>
             <option value="nb_professeur" {% if app.request.query.get('sortBy') == 'nb_professeur' %}selected{% endif %}>Nombre de professeurs</option>
         </select>
     </form>
+</div>
+
+    
     <script>
         // Lorsque l'option est modifiée, soumettre le formulaire
         document.getElementById('filterOption').addEventListener('change', function() {
             this.form.submit();
         });
-    </script>
+    </script><br>
     
+    <div class="col-lg-6 mb-3">
+        <form class="search-form" action="{{ path('app_Ecole_Home') }}" method="GET">
+            <div class="input-group">
+                <input class="form-control" type="search" name="search" placeholder="rechercher par Nom ...">
+                <button class="btn btn-primary" type="submit">Rechercher</button>
+            </div>
+        </form>
+    </div>
     <table class="table">
         <thead>
             <tr>
