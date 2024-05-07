@@ -1,0 +1,46 @@
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_label(form.nomprojet) }}
+                {{ form_widget(form.nomprojet, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.nomprojet) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.description) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.nomentreprise) }}
+                {{ form_widget(form.nomentreprise, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.nomentreprise) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.email) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.numTel) }}
+                {{ form_widget(form.numTel, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.numTel) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.domaine) }}
+                {{ form_widget(form.domaine, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.domaine) }}
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+            </div>
+            {{ form_end(form) }}
+            <div class="text-center">
+                <a href="{{ path('app_projet_index') }}" class="btn btn-secondary mt-3">Back to list</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

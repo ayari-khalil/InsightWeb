@@ -1,0 +1,101 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Projet index{% endblock %}
+
+{% block body %}
+
+
+    <h1>Projet index</h1>
+
+    <!--_________AJAX SEARCH__________ -->
+        <div class="d-flex"  >
+            <!--_______________________________________-->
+           
+            <div class="col-md-4 mx-auto">
+                <div class="input-group">
+                    <input class="form-control border-end-1 border rounded-pill" type="search" value="" id="example-search-input" style="bottom: 10px;padding-right: 12px;">
+                    <span class="input-group-append">
+                        <button class="btn btn-outline-secondary border-bottom-1 border rounded-pill ms-n5 border border-primary" type="button" id="searchButton"style="left: 60px;">
+                            Search from projet list
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!--__________-->
+    
+    <!-- Tableau des projets -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idprojet</th>
+                <th>Nomprojet</th>
+                <th>Description</th>
+                <th>Nomentreprise</th>
+                <th>Email</th>
+                <th>NumTel</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+       <tbody>
+    {% for projet in projets %}
+        <tr class="event-row">
+            <td>{{ projet.idprojet }}</td>
+            <td>{{ projet.nomprojet }}</td>
+            <td>{{ projet.description }}</td>
+            <td>{{ projet.nomentreprise }}</td>
+            <td>{{ projet.email }}</td>
+            <td>{{ projet.NumTel }}</td>
+            <td>
+                <div class="btn-group" role="group" aria-label="Actions">
+                    <a href="{{ path('app_projet_show', {'idprojet': projet.idprojet}) }}" class="btn btn-primary">Show</a>
+                    <a href="{{ path('app_projet_edit', {'idprojet': projet.idprojet}) }}" class="btn btn-primary">Edit</a>
+                    <a href="{{ path('app_projet_send_sms', {'idprojet': projet.idprojet}) }}" class="btn btn-primary">Send SMS</a>
+                    <a href="{{ path('app_projet_send_email', {'idprojet': projet.idprojet}) }}" class="btn btn-primary">Send Email</a>
+                </div>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="7">No records found</td>
+        </tr>
+    {% endfor %}
+</tbody>
+
+    </table>
+
+    <a href="{{ path('app_projet_new') }}">Create new</a>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script>
+                $(document).ready(function () {
+                    $('#searchButton').click(function () {
+                        var searchQuery = $('#example-search-input').val().toLowerCase();
+                        var noEventsRow = $('#noEventsRow');
+            
+                
+                        $('.event-row').each(function () {
+                            var eventRowText = $(this).text().toLowerCase();
+            
+                        
+                            $(this).toggle(eventRowText.includes(searchQuery));
+                        });
+            
+                    
+                        noEventsRow.toggle($('.event-row:visible').length === 0);
+                    });
+                });
+        </script>    
+
+{% block additional_content %}
+<div class="row">
+        <div class="col-md-6">
+            <h2>Graphique des statistiques</h2>
+            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+        </div>
+    </div>
+    {% endblock %}
+{% endblock %}            
+    
+

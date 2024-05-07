@@ -1,0 +1,33 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Projets disponibles{% endblock %}
+
+{% block body %}
+
+    <h1 class="mb-4">Projets disponibles</h1>
+
+    <!-- Cartes des projets -->
+    <div class="row">
+        {% for projet in projets %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>NOM DU PROJET :</strong> {{ projet.nomprojet }}</h5>
+                        <p class="card-text">{{ projet.description }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Entreprise :</strong> {{ projet.nomentreprise }}</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="{{ path('frontend_show', {'idprojet': projet.idprojet}) }}" class="btn btn-primary">Détails</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <!-- END Cartes des projets -->
+
+    {# Affichage de la pagination #}
+    {{ knp_pagination_render(projets) }}
+
+{% endblock %}

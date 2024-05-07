@@ -1,0 +1,22 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Projet{% endblock %}
+
+{% block body %}
+    <h1>Projet</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title"><strong>Nom du Projet :</strong> {{ projet.nomprojet }}</h5>
+            <p class="card-text"><strong>Description :</strong> {{ projet.description }}</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Nom de l'Entreprise :</strong> {{ projet.nomentreprise }}</li>
+                <li class="list-group-item"><strong>Email du Professeur :</strong> {{ projet.email }}</li>
+                <li class="list-group-item"><strong>Numéro de Téléphone du Professeur :</strong> {{ projet.numTel }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <a href="{{ path('frontend_index') }}" class="btn btn-primary mt-3">Retour à la liste</a>
+
+{% endblock %}

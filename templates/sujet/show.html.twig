@@ -1,0 +1,26 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Sujet{% endblock %}
+
+{% block body %}
+    <h1>Sujet</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idsujet</th>
+                <td>{{ sujet.idsujet }}</td>
+            </tr>
+            <tr>
+                <th>Domaine</th>
+                <td>{{ sujet.domaine }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_sujet_index') }}">back to list</a>
+
+    <a href="{{ path('app_sujet_edit', {'idsujet': sujet.idsujet}) }}">edit</a>
+
+    {{ include('sujet/_delete_form.html.twig') }}
+{% endblock %}
