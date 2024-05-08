@@ -13,11 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Sujet
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idSujet", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="idSujet", type="integer")
      */
     private $idsujet;
 

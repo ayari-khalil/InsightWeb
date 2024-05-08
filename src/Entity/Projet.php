@@ -7,21 +7,15 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Projet
  *
- * @ORM\Table(name="projet", indexes={
- *     @ORM\Index(name="idSujet_2", columns={"domaine"}),
- *     @ORM\Index(name="idSujet_3", columns={"domaine"}),
- *     @ORM\Index(name="idSujet", columns={"domaine"})
- * })
+ * @ORM\Table(name="projet", indexes={@ORM\Index(name="idSujet_2", columns={"domaine"}), @ORM\Index(name="idSujet_3", columns={"domaine"}), @ORM\Index(name="idSujet", columns={"domaine"})})
  * @ORM\Entity
  */
 class Projet
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idProjet", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="idProjet", type="integer")
      */
     private $idprojet;
 
@@ -64,23 +58,25 @@ class Projet
      * @var \Sujet|null
      *
      * @ORM\ManyToOne(targetEntity="Sujet")
-     * @ORM\JoinColumn(name="domaine", referencedColumnName="idSujet")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="domaine", referencedColumnName="idSujet")
+     * })
      */
     private $domaine;
 
     // Ajout des getters et setters
 
-    public function getIdprojet(): ?int
+    public function getIdProjet(): ?int
     {
         return $this->idprojet;
     }
 
-    public function getNomprojet(): ?string
+    public function getNomProjet(): ?string
     {
         return $this->nomprojet;
     }
 
-    public function setNomprojet(string $nomprojet): self
+    public function setNomProjet(string $nomprojet): self
     {
         $this->nomprojet = $nomprojet;
 
@@ -99,12 +95,12 @@ class Projet
         return $this;
     }
 
-    public function getNomentreprise(): ?string
+    public function getNomEntreprise(): ?string
     {
         return $this->nomentreprise;
     }
 
-    public function setNomentreprise(string $nomentreprise): self
+    public function setNomEntreprise(string $nomentreprise): self
     {
         $this->nomentreprise = $nomentreprise;
 

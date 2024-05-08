@@ -31,11 +31,11 @@ class FrontendController extends AbstractController
         ]);
     }
 
-#[Route('/{idprojet}', name: 'frontend_show', methods: ['GET'])]
-public function show(Projet $projet): Response
-{
-    return $this->render('frontend/frontShow.html.twig', [
-        'projet' => $projet,
-    ]);
-}
+    #[Route('/{idprojet}', name: 'frontend_show', methods: ['GET'])]
+    public function show(Projet $projet): Response
+    {
+        return $this->render('frontend/frontShow.html.twig', [
+            'projet' => $projet,
+        ]);
+    }
 }

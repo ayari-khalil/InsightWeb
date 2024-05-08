@@ -10,6 +10,26 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    #hedhouma ena zedetha
+    App\Controller\ProjetController:
+        autowire: true
+        autoconfigure: true 
+
+    App\Controller\SujetController:
+        autowire: true
+        autoconfigure: true 
+
+    App\Controller\FrontendController:
+        autowire: true
+        autoconfigure: true         
+
+    App\Entity\Projet:
+        autowire: true
+        autoconfigure: true
+   
+    App\Entity\Sujet:
+        autowire: true
+        autoconfigure: true           
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

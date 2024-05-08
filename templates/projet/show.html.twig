@@ -29,14 +29,15 @@
             </tr>
              <tr>
                 <th>NumTel</th>
-                <td>{{ projet.NumTel }}</td>
+                <td>{{ projet.numtel }}</td>
             </tr>
         </tbody>
     </table>
 
     <a href="{{ path('app_projet_index') }}">back to list</a>
 
-    <a href="{{ path('app_projet_edit', {'idprojet': projet.idprojet}) }}">edit</a>
+    <a href="{{ path('app_projet_edit', {'idprojet': projet.idprojet | number_format}) }}">edit</a>
+
 
     {{ include('projet/_delete_form.html.twig') }}
 {% endblock %}

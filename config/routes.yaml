@@ -1,3 +1,29 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+controllers:
+    resource: ../src/Controller/
+    type: annotation
+
+kernel:
+    resource: ../src/Kernel.php
+    type: annotation
+
+#j'ai ajouté une nouvelle route pour afficher un projet en utilisant 'id'
+app_projet_show:
+    path: /projet/{idprojet}
+    controller: App\Controller\ProjetController::show
+
+app_sujet_show:
+    path: '/sujet/{idsujet}'
+    controller: 'App\Controller\SujetController::show'
+    methods: ['GET']
+frontend_show:
+    path: /{idprojet}
+    controller: 'App\Controller\FrontendController::show'
+    methods: ['GET']
+
+app_projet_edit:
+    path: '/projet/{idprojet}/edit'
+    controller: 'App\Controller\ProjetController::edit'
+    methods: ['GET', 'POST']
+    requirements:
+        idprojet: '\d+'  # Assurez-vous que idprojet est un nombre entier
+

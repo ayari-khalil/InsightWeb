@@ -25,6 +25,7 @@
         <!--__________-->
     
     <!-- Tableau des projets -->
+    <div class ="row">
     <table class="table">
         <thead>
             <tr>
@@ -45,7 +46,7 @@
             <td>{{ projet.description }}</td>
             <td>{{ projet.nomentreprise }}</td>
             <td>{{ projet.email }}</td>
-            <td>{{ projet.NumTel }}</td>
+            <td>{{ projet.numtel }}</td>
             <td>
                 <div class="btn-group" role="group" aria-label="Actions">
                     <a href="{{ path('app_projet_show', {'idprojet': projet.idprojet}) }}" class="btn btn-primary">Show</a>
@@ -60,6 +61,7 @@
             <td colspan="7">No records found</td>
         </tr>
     {% endfor %}
+    </div>
 </tbody>
 
     </table>
