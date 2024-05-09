@@ -20,6 +20,11 @@ class SujetType extends AbstractType
                     'Développement Web' => 'Développement Web',
                     'Intelligence Artificielle' => 'Intelligence Artificielle',
                     'Robotique' => 'Robotique',
+                    
+                'Développement Mobile' => 'Développement Mobile',
+                'Sécurité Informatique' => 'Sécurité Informatique',
+                'Cloud Computing' => 'Cloud Computing',
+                'Analyse de Données' => 'Analyse de Données',
                 ],
                 'required' => true,
                 'placeholder' => 'Sélectionner un domaine',
